@@ -1,0 +1,30 @@
+{
+  "Auto property": {
+    "prefix": "prop",
+    "body": ["public ${1:string} ${2:Name} { get; set; }$0"]
+  },
+  "Constructor": {
+    "prefix": "ctor",
+    "body": ["public ${1:${TM_FILENAME_BASE}}(${2})", "{", "    $0", "}"]
+  },
+  "Class": {
+    "prefix": "class",
+    "body": ["public class ${1:Name}", "{", "    $0", "}"]
+  },
+  "Interface": {
+    "prefix": "interface",
+    "body": ["public interface ${1:IName}", "{", "    $0", "}"]
+  },
+  "Record": {
+    "prefix": "record",
+    "body": ["public record ${1:Name}(${2});$0"]
+  },
+  "Enum": {
+    "prefix": "enum",
+    "body": ["public enum ${1:Name}", "{", "    ${2:Value}$0", "}"]
+  },
+  "ASP.NET Controller": {
+    "prefix": "controller",
+    "body": ["[ApiController]", "[Route(\"api/[controller]\")]", "public class ${1:Name}Controller : ControllerBase", "{", "    $0", "}"]
+  }
+}
