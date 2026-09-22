@@ -1,0 +1,10 @@
+[[mgr.prepend_keymap]]
+on   = "<A-z>"
+run  = "plugin compress"
+desc = "Compactar arquivos selecionados"
+
+
+[[mgr.prepend_keymap]]
+on   = "<A-x>"
+run  = "open --interactive"
+desc = "Extrair arquivo"

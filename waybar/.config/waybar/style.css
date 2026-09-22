@@ -1,0 +1,388 @@
+/* Author: Eduardo de Sá Coêlho Ribeiro Costa */
+/* Github: https://github.com/edudscrc */
+/* Waybar v0.12.0 */
+
+@define-color modules_background rgba(40, 40, 40, 0.55);
+
+/* DP-1 */
+@define-color workspaces_button_off #928374;
+@define-color workspaces_button_on #fbf1c7;
+@define-color workspaces_button_active_bg rgba(235, 219, 178, 0.16);
+
+/* HDMI-A-1 */
+@define-color workspaces_button_off_hdmi rgba(235, 120, 120, 0.67);
+@define-color workspaces_button_on_hdmi rgba(235, 120, 120, 1);
+@define-color workspaces_button_active_bg_hdmi rgba(235, 120, 120, 0.16);
+
+@define-color tray_menu #1D2021;
+@define-color tray_menu_border #3c3836;
+@define-color tray_menu_item #ebdbb2;
+@define-color tray_menu_item_hover #ebdbb2;
+@define-color tray_menu_item_hover_background #504945;
+
+@define-color clock_idle #ebdbb2;
+@define-color clock_hover #a89984;
+
+/* DP-1 */
+@define-color weather_idle rgba(205, 205, 205, 0.67);
+@define-color weather_hover rgba(205, 205, 205, 1);
+
+/* HDMI-A-1 */
+@define-color weather_idle_hdmi rgba(235, 120, 120, 0.67);
+@define-color weather_hover_hdmi rgba(235, 120, 120, 1);
+
+@define-color cpu_idle #b8bb26;
+@define-color cpu_hover #98971a;
+
+@define-color memory_idle #d3869b;
+@define-color memory_hover #b16286;
+
+@define-color temperature_idle #fe8019;
+@define-color temperature_hover #d65d0e;
+
+@define-color brightness_idle #fe8019;
+@define-color brightness_hover #d65d0e;
+
+@define-color sound_idle #fabd2f;
+@define-color sound_hover #d79921;
+
+@define-color mic_idle #fabd2f;
+@define-color mic_hover #d79921;
+
+@define-color running_apps_idle #b8bb26;
+@define-color running_apps_hover #98971a;
+
+@define-color network_idle #458488;
+@define-color network_hover #83a598;
+
+@define-color tooltip_background #282828;
+@define-color tooltip_text #ebdbb2;
+
+/*----------------*/
+/*-----GLOBAL-----*/
+/*----------------*/
+
+* {
+  font-family: "Monaspace Neon Frozen", "JetBrainsMono Nerd Font";
+  font-weight: 600;
+  font-size: 16px;
+}
+
+window#waybar {
+  background-color: transparent;
+}
+
+#waybar {
+  background-color: transparent;
+}
+
+/* Cada "pill" da barra: fundo translúcido + cantos arredondados */
+#workspaces,
+#custom-running-apps,
+#clock,
+#custom-weather,
+#network,
+#cpu,
+#memory,
+#custom-wl-gammarelay-temperature,
+#custom-wl-gammarelay-brightness,
+#custom-wireplumber,
+#custom-microphone {
+  background-color: @modules_background;
+  border-radius: 14px;
+  padding: 2px 10px;
+  margin: 1px 4px 4px;
+  transition: all 0.7s ease;
+}
+
+/*--------------------*/
+/*-----WORKSPACES-----*/
+/*--------------------*/
+
+#workspaces {
+  margin-left: 6px;
+  margin-right: 16px;
+  padding: 2px 6px;
+}
+
+#workspaces button {
+  color: @workspaces_button_off;
+
+  margin: 0px 2px;
+  padding: 0px 4px;
+
+  border-radius: 10px;
+
+  transition: all 0.3s ease;
+}
+
+#workspaces button.active {
+  color: @workspaces_button_on;
+  background-color: @workspaces_button_active_bg;
+
+  transition: all 0.3s ease;
+}
+
+#workspaces button:hover {
+  background: none;
+
+  color: @workspaces_button_on;
+
+  box-shadow: none;
+  text-shadow: none;
+  transition: none;
+  border-color: transparent;
+
+  transition: all 0.3s ease;
+}
+
+/* HDMI-A-1 */
+window#waybar.HDMI-A-1 #workspaces button {
+  color: @workspaces_button_off_hdmi;
+}
+
+window#waybar.HDMI-A-1 #workspaces button.active {
+  color: @workspaces_button_on_hdmi;
+  background-color: @workspaces_button_active_bg_hdmi;
+}
+
+window#waybar.HDMI-A-1 #workspaces button:hover {
+  color: @workspaces_button_on_hdmi;
+}
+
+/*-------------------------*/
+/*---Player de Musica------*/
+/*-------------------------*/
+
+/* Ambos */
+#custom-media {
+    padding: 2px 10px 3px 6px;
+    margin: 5px 2px;
+
+    background-color: rgba(65, 57, 52, 0.65);
+
+    border: 1px solid;
+    border-radius: 20px;
+}
+
+/* Firefox */
+#custom-media.firefox {
+    border-color: #ff7b7b;
+    color: #ff7b7b;
+}
+
+/* Spotify */
+#custom-media.spotify {
+    border-color: #89d185;
+    color: #89d185;
+}
+
+
+/*---------------------*/
+/*---RUNNING APPS------*/
+/*---------------------*/
+
+#custom-running-apps {
+  color: @running_apps_idle;
+
+  transition: all 0.3s ease;
+}
+
+#custom-running-apps:hover {
+  color: @running_apps_hover;
+
+  transition: all 0.3s ease;
+}
+
+/* ---------------------------------*/
+
+/*----------------*/
+/*------TRAY------*/
+/*----------------*/
+
+#tray {
+    padding: 0 8px;
+    margin: 5px 2px;
+
+    background-color: rgba(65, 57, 52, 0.65);
+
+    border-radius: 20px;
+}
+
+/* Botão que abre/fecha o drawer */
+#custom-tray-button {
+    padding: 0 6px;
+    margin: 5px 2px;
+
+    color: #ebdbb2;
+
+    background-color: rgba(65, 57, 52, 0.65);
+
+    border-radius: 20px;
+}
+
+#custom-tray-button:hover {
+    color: #ffffff;
+}
+
+/*---------------*/
+/*-----CLOCK-----*/
+/*---------------*/
+
+#clock {
+  color: @clock_idle;
+
+  transition: all 0.3s ease;
+}
+
+#clock:hover {
+  color: @clock_hover;
+
+  transition: all 0.3s ease;
+}
+
+/*-----------------*/
+/*-----WEATHER-----*/
+/*-----------------*/
+
+/* DP-1 / padrão */
+#custom-weather {
+  color: @weather_idle;
+
+  transition: all 0.3s ease;
+}
+
+#custom-weather:hover {
+  color: @weather_hover;
+
+  transition: all 0.3s ease;
+}
+
+/* HDMI-A-1 */
+window#waybar.HDMI-A-1 #custom-weather {
+  color: @weather_idle_hdmi;
+}
+
+window#waybar.HDMI-A-1 #custom-weather:hover {
+  color: @weather_hover_hdmi;
+}
+
+/* ---------------------------------*/
+
+/*-----------------*/
+/*-----CPU/RAM-----*/
+/*-----------------*/
+
+#cpu {
+  color: @cpu_idle;
+
+  transition: all 0.3s ease;
+}
+
+#cpu:hover {
+  color: @cpu_hover;
+
+  transition: all 0.3s ease;
+}
+
+#memory {
+  color: @memory_idle;
+
+  transition: all 0.3s ease;
+}
+
+#memory:hover {
+  color: @memory_hover;
+
+  transition: all 0.3s ease;
+}
+
+/*-----------------*/
+/*-----NETWORK-----*/
+/*-----------------*/
+
+#network {
+  color: @network_idle;
+
+  transition: all 0.3s ease;
+}
+
+#network:hover {
+  color: @network_hover;
+
+  transition: all 0.3s ease;
+}
+
+/*-----------------------*/
+/*-----TEMP/BRIGHT-------*/
+/*-----------------------*/
+
+#custom-wl-gammarelay-temperature {
+  color: @temperature_idle;
+
+  transition: all 0.3s ease;
+}
+
+#custom-wl-gammarelay-temperature:hover {
+  color: @temperature_hover;
+
+  transition: all 0.3s ease;
+}
+
+#custom-wl-gammarelay-brightness {
+  color: @brightness_idle;
+
+  transition: all 0.3s ease;
+}
+
+#custom-wl-gammarelay-brightness:hover {
+  color: @brightness_hover;
+
+  transition: all 0.3s ease;
+}
+
+/*---------------------*/
+/*-----WIREPLUMBER-----*/
+/*---------------------*/
+
+#custom-wireplumber {
+  color: @sound_idle;
+
+  transition: all 0.3s ease;
+}
+
+#custom-wireplumber:hover {
+  color: @sound_hover;
+
+  transition: all 0.3s ease;
+}
+
+/*-----------------------*/
+/*-----MICROPHONE--------*/
+/*-----------------------*/
+
+#custom-microphone {
+  color: @mic_idle;
+
+
+  transition: all 0.3s ease;
+}
+
+#custom-microphone:hover {
+  color: @mic_hover;
+
+  transition: all 0.3s ease;
+}
+
+/*-----------------*/
+/*-----TOOLTIP-----*/
+/*-----------------*/
+
+tooltip {
+  background-color: @tooltip_background;
+  border-radius: 10px;
+}
+
+tooltip label {
+  color: @tooltip_text;
+}

@@ -1,0 +1,107 @@
+configuration {
+    modi: "drun";
+    show-icons: true;
+    display-drun: "";
+    drun-display-format: "{name}";
+}
+
+* {
+    font: "Fira Code 13";
+
+    background:     #1e1e2eee;
+    background-alt: #313244ee;
+    foreground:     #f5e0e0;
+    selected:       #f38ba8;
+
+    border-color:   #eba0ac;
+
+    spacing: 0;
+    margin: 0;
+}
+
+window {
+    width: 600px;
+
+    location: north;
+    anchor: north;
+
+    y-offset: 180px;
+
+    background-color: @background;
+
+    border: 1px;
+    border-radius: 16px;
+
+    padding: 16px;
+}
+
+mainbox {
+    background-color: transparent;
+    spacing: 12px;
+}
+
+inputbar {
+    background-color: @background-alt;
+
+    border-radius: 10px;
+
+    padding: 12px 16px;
+    spacing: 10px;
+
+    children: [ prompt, entry ];
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @selected;
+
+    str: "";
+}
+
+entry {
+    background-color: transparent;
+    text-color: @foreground;
+
+    placeholder: "Pesquisar aplicativos...";
+    placeholder-color: #6c7086;
+}
+
+listview {
+    background-color: transparent;
+
+    lines: 6;
+    columns: 1;
+
+    spacing: 4px;
+    fixed-height: false;
+}
+
+element {
+    background-color: transparent;
+
+    border-radius: 10px;
+
+    padding: 10px;
+    spacing: 12px;
+}
+
+element selected {
+    background-color: @background-alt;
+}
+
+element-icon {
+    background-color: transparent;
+
+    size: 28px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: @foreground;
+
+    vertical-align: 0.5;
+}
+
+element-text selected {
+    text-color: @selected;
+}
