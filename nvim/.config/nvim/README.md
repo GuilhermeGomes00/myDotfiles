@@ -9,6 +9,9 @@ cada área de plugins possui um arquivo pequeno em `lua/plugins/`.
 - `:Lazy` gerencia plugins; as revisões ficam fixadas em `lazy-lock.json`.
 - `:Mason` gerencia LSPs, formatadores, linters e adapters de debug.
 - `:ConformInfo`, `:LspInfo` e `:checkhealth` ajudam no diagnóstico.
+- Markdown usa Treesitter (`markdown` e `markdown_inline`) e
+  `render-markdown.nvim` para melhorar títulos, listas, checkboxes, citações,
+  código, links e separadores diretamente no buffer.
 - `:FormatToggle` desativa ou reativa format on save no buffer atual.
 - As sessões são salvas pelo Persistence ao sair, mas só são restauradas por
   comando. Abrir `nvim .` nunca restaura uma sessão automaticamente.
@@ -73,8 +76,10 @@ do Kitty é `background_opacity 0.90`; esta configuração não altera o Kitty.
 | `<leader>nj` | criar arquivo Java |
 | `<leader>nh` | criar arquivo C |
 | `H` / `L` | buffer anterior / próximo |
+| `<leader>q` | fechar buffer com confirmação se modificado |
 | `<leader>bd` | fechar buffer com confirmação se modificado |
 | `<leader>w` | salvar |
+| `<leader>mr` | alternar a renderização do Markdown no buffer atual |
 | `<C-h/j/k/l>` | navegar entre janelas |
 | `<Esc>` | limpar destaque da busca |
 | `<leader>ff` / `<leader>fg` | procurar arquivo / texto no projeto |
@@ -96,7 +101,7 @@ do Kitty é `background_opacity 0.90`; esta configuração não altera o Kitty.
 | `<leader>gs` / `<leader>gr` | stage / reset hunk |
 | `<leader>gp` / `<leader>gb` / `<leader>gd` | preview / blame / diff |
 | `<leader>gg` | LazyGit flutuante, quando instalado |
-| `<leader>tt` ou `<C-/>` | terminal flutuante |
+| `<leader>tt`, `<C-'>`, `<C-/>` ou `<C-_>` | terminal flutuante |
 | `<Esc><Esc>` | sair do modo terminal |
 | `F5` / `F9` | continuar/iniciar debug / breakpoint |
 | `F10` / `F11` / `Shift-F11` | step over / into / out |

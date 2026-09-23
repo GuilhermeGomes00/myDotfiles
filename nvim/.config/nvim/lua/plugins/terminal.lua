@@ -30,6 +30,7 @@ return {
 		lazy = false,
 		opts = { terminal = {} },
 		keys = {
+			{ "<leader>tt", terminal, desc = "Terminal flutuante" },
 			{ "<C-'>", terminal, desc = "Terminal flutuante", mode = { "n", "t" } },
 			{ "<C-/>", terminal, desc = "Terminal flutuante", mode = { "n", "t" } },
 			{ "<C-_>", terminal, desc = "Terminal flutuante", mode = { "n", "t" } },

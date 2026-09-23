@@ -1,60 +1,79 @@
 /* Author: Eduardo de Sá Coêlho Ribeiro Costa */
-/* Github: https://github.com/edudscrc */
 /* Waybar v0.12.0 */
+
+/*----------------*/
+/*-----COLORS-----*/
+/*----------------*/
 
 @define-color modules_background rgba(40, 40, 40, 0.55);
 
-/* DP-1 */
-@define-color workspaces_button_off #928374;
-@define-color workspaces_button_on #fbf1c7;
-@define-color workspaces_button_active_bg rgba(235, 219, 178, 0.16);
+/* Tema principal */
+@define-color accent #ff7b7b;
+@define-color accent_dim rgba(255, 123, 123, 0.67);
+@define-color accent_bg rgba(255, 123, 123, 0.16);
+@define-color accent_hover #ff9a9a;
+
+/* Workspaces */
+@define-color workspaces_button_off @accent_dim;
+@define-color workspaces_button_on @accent;
+/* @define-color workspaces_button_active_bg @accent_bg; */
 
 /* HDMI-A-1 */
-@define-color workspaces_button_off_hdmi rgba(235, 120, 120, 0.67);
-@define-color workspaces_button_on_hdmi rgba(235, 120, 120, 1);
-@define-color workspaces_button_active_bg_hdmi rgba(235, 120, 120, 0.16);
+@define-color workspaces_button_off_hdmi @accent_dim;
+@define-color workspaces_button_on_hdmi @accent;
+/* @define-color workspaces_button_active_bg_hdmi @accent_bg; */
 
+/* Tray */
 @define-color tray_menu #1D2021;
 @define-color tray_menu_border #3c3836;
 @define-color tray_menu_item #ebdbb2;
-@define-color tray_menu_item_hover #ebdbb2;
+@define-color tray_menu_item_hover @accent;
 @define-color tray_menu_item_hover_background #504945;
 
-@define-color clock_idle #ebdbb2;
-@define-color clock_hover #a89984;
+/* Clock */
+@define-color clock_idle @accent;
+@define-color clock_hover @accent_hover;
 
-/* DP-1 */
-@define-color weather_idle rgba(205, 205, 205, 0.67);
-@define-color weather_hover rgba(205, 205, 205, 1);
+/* Weather */
+@define-color weather_idle rgba(50, 200, 225, 0.67);
+@define-color weather_hover rgba(50, 200, 250, 0.7);
 
-/* HDMI-A-1 */
-@define-color weather_idle_hdmi rgba(235, 120, 120, 0.67);
-@define-color weather_hover_hdmi rgba(235, 120, 120, 1);
+@define-color weather_idle_hdmi @accent_dim;
+@define-color weather_hover_hdmi @accent;
 
-@define-color cpu_idle #b8bb26;
-@define-color cpu_hover #98971a;
+/* CPU */
+@define-color cpu_idle @accent;
+@define-color cpu_hover @accent_hover;
 
-@define-color memory_idle #d3869b;
-@define-color memory_hover #b16286;
+/* RAM */
+@define-color memory_idle @accent;
+@define-color memory_hover @accent_hover;
 
-@define-color temperature_idle #fe8019;
-@define-color temperature_hover #d65d0e;
+/* Temperature */
+@define-color temperature_idle @accent;
+@define-color temperature_hover @accent_hover;
 
-@define-color brightness_idle #fe8019;
-@define-color brightness_hover #d65d0e;
+/* Brightness */
+@define-color brightness_idle @accent;
+@define-color brightness_hover @accent_hover;
 
-@define-color sound_idle #fabd2f;
-@define-color sound_hover #d79921;
+/* Sound */
+@define-color sound_idle @accent;
+@define-color sound_hover @accent_hover;
 
-@define-color mic_idle #fabd2f;
-@define-color mic_hover #d79921;
+/* Microphone */
+@define-color mic_idle @accent;
+@define-color mic_hover @accent_hover;
 
-@define-color running_apps_idle #b8bb26;
-@define-color running_apps_hover #98971a;
+/* Running apps */
+@define-color running_apps_idle @accent;
+@define-color running_apps_hover @accent_hover;
 
-@define-color network_idle #458488;
-@define-color network_hover #83a598;
+/* Network */
+@define-color network_idle @accent;
+@define-color network_hover @accent_hover;
 
+/* Tooltip */
 @define-color tooltip_background #282828;
 @define-color tooltip_text #ebdbb2;
 
@@ -89,9 +108,12 @@ window#waybar {
 #custom-wireplumber,
 #custom-microphone {
   background-color: @modules_background;
+
   border-radius: 14px;
+
   padding: 2px 10px;
   margin: 1px 4px 4px;
+
   transition: all 0.7s ease;
 }
 
@@ -102,6 +124,7 @@ window#waybar {
 #workspaces {
   margin-left: 6px;
   margin-right: 16px;
+
   padding: 2px 6px;
 }
 
@@ -130,13 +153,14 @@ window#waybar {
 
   box-shadow: none;
   text-shadow: none;
-  transition: none;
+
   border-color: transparent;
 
   transition: all 0.3s ease;
 }
 
 /* HDMI-A-1 */
+
 window#waybar.HDMI-A-1 #workspaces button {
   color: @workspaces_button_off_hdmi;
 }
@@ -151,32 +175,34 @@ window#waybar.HDMI-A-1 #workspaces button:hover {
 }
 
 /*-------------------------*/
-/*---Player de Musica------*/
+/*---PLAYER DE MUSICA------*/
 /*-------------------------*/
 
 /* Ambos */
+
 #custom-media {
-    padding: 2px 10px 3px 6px;
-    margin: 5px 2px;
+  padding: 2px 10px 3px 6px;
+  margin: 5px 2px;
 
-    background-color: rgba(65, 57, 52, 0.65);
+  background-color: rgba(65, 57, 52, 0.65);
 
-    border: 1px solid;
-    border-radius: 20px;
+  border: 1px solid;
+  border-radius: 20px;
 }
 
 /* Firefox */
+
 #custom-media.firefox {
-    border-color: #ff7b7b;
-    color: #ff7b7b;
+  border-color: @accent;
+  color: @accent;
 }
 
 /* Spotify */
-#custom-media.spotify {
-    border-color: #89d185;
-    color: #89d185;
-}
 
+#custom-media.spotify {
+  border-color: #89d185;
+  color: #89d185;
+}
 
 /*---------------------*/
 /*---RUNNING APPS------*/
@@ -194,35 +220,38 @@ window#waybar.HDMI-A-1 #workspaces button:hover {
   transition: all 0.3s ease;
 }
 
-/* ---------------------------------*/
-
 /*----------------*/
 /*------TRAY------*/
 /*----------------*/
 
 #tray {
-    padding: 0 8px;
-    margin: 5px 2px;
+  padding: 0 8px;
+  margin: 5px 2px;
 
-    background-color: rgba(65, 57, 52, 0.65);
+  background-color: rgba(65, 57, 52, 0.65);
 
-    border-radius: 20px;
+  border-radius: 20px;
 }
 
 /* Botão que abre/fecha o drawer */
+
 #custom-tray-button {
-    padding: 0 6px;
-    margin: 5px 2px;
+  padding: 0 6px;
+  margin: 5px 2px;
 
-    color: #ebdbb2;
+  color: @accent;
 
-    background-color: rgba(65, 57, 52, 0.65);
+  background-color: rgba(65, 57, 52, 0.65);
 
-    border-radius: 20px;
+  border-radius: 20px;
+
+  transition: all 0.3s ease;
 }
 
 #custom-tray-button:hover {
-    color: #ffffff;
+  color: @accent_hover;
+
+  transition: all 0.3s ease;
 }
 
 /*---------------*/
@@ -246,6 +275,7 @@ window#waybar.HDMI-A-1 #workspaces button:hover {
 /*-----------------*/
 
 /* DP-1 / padrão */
+
 #custom-weather {
   color: @weather_idle;
 
@@ -259,6 +289,7 @@ window#waybar.HDMI-A-1 #workspaces button:hover {
 }
 
 /* HDMI-A-1 */
+
 window#waybar.HDMI-A-1 #custom-weather {
   color: @weather_idle_hdmi;
 }
@@ -266,8 +297,6 @@ window#waybar.HDMI-A-1 #custom-weather {
 window#waybar.HDMI-A-1 #custom-weather:hover {
   color: @weather_hover_hdmi;
 }
-
-/* ---------------------------------*/
 
 /*-----------------*/
 /*-----CPU/RAM-----*/
@@ -364,7 +393,6 @@ window#waybar.HDMI-A-1 #custom-weather:hover {
 #custom-microphone {
   color: @mic_idle;
 
-
   transition: all 0.3s ease;
 }
 
@@ -380,6 +408,7 @@ window#waybar.HDMI-A-1 #custom-weather:hover {
 
 tooltip {
   background-color: @tooltip_background;
+
   border-radius: 10px;
 }
 
