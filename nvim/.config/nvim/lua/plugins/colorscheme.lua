@@ -1,58 +1,49 @@
 return {
   {
-    "rebelot/kanagawa.nvim",
+    "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     opts = {
-      compile = false,
-      undercurl = true,
+      style = "night",
       transparent = true,
-      dimInactive = false,
-      terminalColors = true,
-      theme = "wave",
-      background = { dark = "wave", light = "lotus" },
-      colors = {
-        theme = { all = { ui = { bg_gutter = "none" } } },
+      styles = {
+        sidebars = "transparent",
+        floats = "dark",
       },
-      overrides = function(colors)
-        local theme = colors.theme
-        return {
-          NormalFloat = { bg = "none" },
-          FloatBorder = { fg = theme.ui.float.fg_border, bg = "none" },
-          FloatTitle = { fg = theme.ui.special, bg = "none", bold = true },
-          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
-          PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
-          PmenuSbar = { bg = theme.ui.bg_m1 },
-          PmenuThumb = { bg = theme.ui.bg_p2 },
-          NvimTreeNormal = { bg = "none" },
-          NvimTreeNormalNC = { bg = "none" },
-          NvimTreeEndOfBuffer = { bg = "none" },
-          LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-          MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-          -- Keep the command/search UI opaque even though other floats are transparent.
-          NoiceCmdlinePopup = { fg = theme.ui.fg, bg = theme.ui.bg_m3 },
-          NoiceCmdlinePopupBorder = { fg = theme.ui.special, bg = theme.ui.bg_m3 },
-          NoiceCmdlinePopupBorderSearch = { fg = theme.diag.warning, bg = theme.ui.bg_m3 },
-          NoiceCmdlinePopupTitle = { fg = theme.ui.special, bg = theme.ui.bg_m3, bold = true },
-          NoiceCmdlineIcon = { fg = theme.ui.special, bg = theme.ui.bg_m3 },
-          NoiceCmdlineIconSearch = { fg = theme.diag.warning, bg = theme.ui.bg_m3 },
-          NoiceCursor = { fg = theme.ui.bg_m3, bg = theme.ui.special },
-          NoicePopupmenu = { fg = theme.ui.fg, bg = theme.ui.bg_m3 },
-          NoicePopupmenuBorder = { fg = theme.ui.special, bg = theme.ui.bg_m3 },
-          NoicePopupmenuMatch = { fg = theme.syn.fun, bg = theme.ui.bg_m3, bold = true },
-          NoicePopupmenuSelected = { fg = theme.ui.fg, bg = theme.ui.bg_p2 },
-          -- FzfLua owns its float independently of Noice, so give it the same solid palette.
-          FzfLuaNormal = { fg = theme.ui.fg, bg = theme.ui.bg_m3 },
-          FzfLuaBorder = { fg = theme.ui.special, bg = theme.ui.bg_m3 },
-          FzfLuaTitle = { fg = theme.ui.special, bg = theme.ui.bg_m3, bold = true },
-          FzfLuaPreviewNormal = { fg = theme.ui.fg, bg = theme.ui.bg_m3 },
-          FzfLuaPreviewBorder = { fg = theme.ui.special, bg = theme.ui.bg_m3 },
-        }
+      on_highlights = function(highlights, colors)
+        highlights.NormalFloat = { bg = colors.bg_float }
+        highlights.FloatBorder = { fg = colors.blue, bg = colors.bg_float }
+        highlights.FloatTitle = { fg = colors.blue, bg = colors.bg_float, bold = true }
+        highlights.Pmenu = { fg = colors.fg, bg = colors.bg_float }
+        highlights.PmenuSel = { fg = colors.fg, bg = colors.bg_highlight }
+        highlights.PmenuSbar = { bg = colors.bg_dark }
+        highlights.PmenuThumb = { bg = colors.bg_highlight }
+        highlights.NvimTreeNormal = { bg = "none" }
+        highlights.NvimTreeNormalNC = { bg = "none" }
+        highlights.NvimTreeEndOfBuffer = { bg = "none" }
+        highlights.LazyNormal = { fg = colors.fg_dark, bg = colors.bg_float }
+        highlights.MasonNormal = { fg = colors.fg_dark, bg = colors.bg_float }
+        highlights.NoiceCmdlinePopup = { fg = colors.fg, bg = colors.bg_float }
+        highlights.NoiceCmdlinePopupBorder = { fg = colors.blue, bg = colors.bg_float }
+        highlights.NoiceCmdlinePopupBorderSearch = { fg = colors.orange, bg = colors.bg_float }
+        highlights.NoiceCmdlinePopupTitle = { fg = colors.blue, bg = colors.bg_float, bold = true }
+        highlights.NoiceCmdlineIcon = { fg = colors.blue, bg = colors.bg_float }
+        highlights.NoiceCmdlineIconSearch = { fg = colors.orange, bg = colors.bg_float }
+        highlights.NoiceCursor = { fg = colors.bg_float, bg = colors.blue }
+        highlights.NoicePopupmenu = { fg = colors.fg, bg = colors.bg_float }
+        highlights.NoicePopupmenuBorder = { fg = colors.blue, bg = colors.bg_float }
+        highlights.NoicePopupmenuMatch = { fg = colors.blue, bg = colors.bg_float, bold = true }
+        highlights.NoicePopupmenuSelected = { fg = colors.fg, bg = colors.bg_highlight }
+        highlights.FzfLuaNormal = { fg = colors.fg, bg = colors.bg_float }
+        highlights.FzfLuaBorder = { fg = colors.blue, bg = colors.bg_float }
+        highlights.FzfLuaTitle = { fg = colors.blue, bg = colors.bg_float, bold = true }
+        highlights.FzfLuaPreviewNormal = { fg = colors.fg, bg = colors.bg_float }
+        highlights.FzfLuaPreviewBorder = { fg = colors.blue, bg = colors.bg_float }
       end,
     },
     config = function(_, opts)
-      require("kanagawa").setup(opts)
-      vim.cmd.colorscheme("kanagawa-wave")
+      require("tokyonight").setup(opts)
+      vim.cmd.colorscheme("tokyonight")
     end,
   },
 }

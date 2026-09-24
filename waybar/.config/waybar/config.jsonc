@@ -37,6 +37,7 @@
         "custom/microphone",
       ],
     },
+
     "custom/media": {
       "format": "{}",
       "return-type": "json",
@@ -73,16 +74,19 @@
     "clock": {
       "format": "{:%a %d %b %H:%M}",
       "tooltip-format": "<tt>{calendar}</tt>",
+
       "calendar": {
         "mode": "year",
         "mode-mon-col": 3,
+
         "format": {
-          "months": "<span color='#d79921'><b>{}</b></span>",
-          "days": "<span color='#ebdbb2'><b>{}</b></span>",
-          "weekdays": "<span color='#98971a'><b>{}</b></span>",
-          "today": "<span color='#cc241d'><b><u>{}</u></b></span>",
+          "months": "<span color='#bb9af7'><b>{}</b></span>",
+          "days": "<span color='#c0caf5'><b>{}</b></span>",
+          "weekdays": "<span color='#7aa2f7'><b>{}</b></span>",
+          "today": "<span color='#f7768e'><b><u>{}</u></b></span>",
         },
       },
+
       "actions": {
         "on-click": "shift_reset",
         "on-scroll-up": "shift_up",
@@ -168,16 +172,19 @@
     "clock": {
       "format": "{:%a %d %b %H:%M}",
       "tooltip-format": "<tt>{calendar}</tt>",
+
       "calendar": {
         "mode": "year",
         "mode-mon-col": 3,
+
         "format": {
-          "months": "<span color='#d79921'><b>{}</b></span>",
-          "days": "<span color='#ebdbb2'><b>{}</b></span>",
-          "weekdays": "<span color='#98971a'><b>{}</b></span>",
-          "today": "<span color='#cc241d'><b><u>{}</u></b></span>",
+          "months": "<span color='#bb9af7'><b>{}</b></span>",
+          "days": "<span color='#c0caf5'><b>{}</b></span>",
+          "weekdays": "<span color='#7aa2f7'><b>{}</b></span>",
+          "today": "<span color='#f7768e'><b><u>{}</u></b></span>",
         },
       },
+
       "actions": {
         "on-click": "shift_reset",
         "on-scroll-up": "shift_up",

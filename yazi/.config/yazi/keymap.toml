@@ -1,10 +1,15 @@
 [[mgr.prepend_keymap]]
-on   = "<A-z>"
-run  = "plugin compress"
+on = "<A-z>"
+run = "plugin compress"
 desc = "Compactar arquivos selecionados"
 
 
 [[mgr.prepend_keymap]]
-on   = "<A-x>"
-run  = "open --interactive"
+on = "<A-x>"
+run = "open --interactive"
 desc = "Extrair arquivo"
+
+[[mgr.prepend_keymap]]
+on = "<C-t>"
+run = 'shell "kitty --directory ." --orphan'
+desc = "Abrir terminal aqui"

@@ -1,81 +1,111 @@
-/* Author: Eduardo de Sá Coêlho Ribeiro Costa */
-/* Waybar v0.12.0 */
-
 /*----------------*/
 /*-----COLORS-----*/
 /*----------------*/
 
-@define-color modules_background rgba(40, 40, 40, 0.55);
+/* Tokyo Night */
+@define-color bg #1a1b26;
+@define-color bg_dark #16161e;
+
+@define-color foreground #c0caf5;
+@define-color muted #565f89;
+
+@define-color red #f7768e;
+@define-color green #9ece6a;
+@define-color yellow #e0af68;
+@define-color orange #ff9e64;
+@define-color blue #7aa2f7;
+@define-color cyan #7dcfff;
+@define-color purple #bb9af7;
+
+/* Fundos translúcidos */
+
+@define-color modules_background rgba(26, 27, 38, 0.45);
+@define-color secondary_background rgba(22, 22, 30, 0.45);
 
 /* Tema principal */
-@define-color accent #ff7b7b;
-@define-color accent_dim rgba(255, 123, 123, 0.67);
-@define-color accent_bg rgba(255, 123, 123, 0.16);
-@define-color accent_hover #ff9a9a;
+
+@define-color accent @red;
+@define-color accent_dim rgba(247, 118, 142, 0.67);
+@define-color accent_bg rgba(247, 118, 142, 0.16);
+@define-color accent_hover #ff9eaa;
 
 /* Workspaces */
+
 @define-color workspaces_button_off @accent_dim;
 @define-color workspaces_button_on @accent;
-/* @define-color workspaces_button_active_bg @accent_bg; */
+@define-color workspaces_button_active_bg @accent_bg;
 
 /* HDMI-A-1 */
+
 @define-color workspaces_button_off_hdmi @accent_dim;
 @define-color workspaces_button_on_hdmi @accent;
-/* @define-color workspaces_button_active_bg_hdmi @accent_bg; */
+@define-color workspaces_button_active_bg_hdmi @accent_bg;
 
 /* Tray */
-@define-color tray_menu #1D2021;
-@define-color tray_menu_border #3c3836;
-@define-color tray_menu_item #ebdbb2;
+
+@define-color tray_menu rgba(26, 27, 38, 0.92);
+@define-color tray_menu_border @blue;
+@define-color tray_menu_item @foreground;
 @define-color tray_menu_item_hover @accent;
-@define-color tray_menu_item_hover_background #504945;
+@define-color tray_menu_item_hover_background rgba(122, 162, 247, 0.15);
 
 /* Clock */
+
 @define-color clock_idle @accent;
 @define-color clock_hover @accent_hover;
 
 /* Weather */
-@define-color weather_idle rgba(50, 200, 225, 0.67);
-@define-color weather_hover rgba(50, 200, 250, 0.7);
+
+@define-color weather_idle rgba(125, 207, 255, 0.67);
+@define-color weather_hover @cyan;
 
 @define-color weather_idle_hdmi @accent_dim;
 @define-color weather_hover_hdmi @accent;
 
 /* CPU */
+
 @define-color cpu_idle @accent;
 @define-color cpu_hover @accent_hover;
 
 /* RAM */
+
 @define-color memory_idle @accent;
 @define-color memory_hover @accent_hover;
 
 /* Temperature */
+
 @define-color temperature_idle @accent;
 @define-color temperature_hover @accent_hover;
 
 /* Brightness */
+
 @define-color brightness_idle @accent;
 @define-color brightness_hover @accent_hover;
 
 /* Sound */
+
 @define-color sound_idle @accent;
 @define-color sound_hover @accent_hover;
 
 /* Microphone */
+
 @define-color mic_idle @accent;
 @define-color mic_hover @accent_hover;
 
 /* Running apps */
+
 @define-color running_apps_idle @accent;
 @define-color running_apps_hover @accent_hover;
 
 /* Network */
+
 @define-color network_idle @accent;
 @define-color network_hover @accent_hover;
 
 /* Tooltip */
-@define-color tooltip_background #282828;
-@define-color tooltip_text #ebdbb2;
+
+@define-color tooltip_background rgba(26, 27, 38, 0.92);
+@define-color tooltip_text @foreground;
 
 /*----------------*/
 /*-----GLOBAL-----*/
@@ -95,7 +125,8 @@ window#waybar {
   background-color: transparent;
 }
 
-/* Cada "pill" da barra: fundo translúcido + cantos arredondados */
+/* Cada "pill" da barra */
+
 #workspaces,
 #custom-running-apps,
 #clock,
@@ -178,30 +209,30 @@ window#waybar.HDMI-A-1 #workspaces button:hover {
 /*---PLAYER DE MUSICA------*/
 /*-------------------------*/
 
-/* Ambos */
-
 #custom-media {
   padding: 2px 10px 3px 6px;
   margin: 5px 2px;
 
-  background-color: rgba(65, 57, 52, 0.65);
+  background-color: @secondary_background;
 
   border: 1px solid;
   border-radius: 20px;
+
+  transition: all 0.3s ease;
 }
 
 /* Firefox */
 
 #custom-media.firefox {
-  border-color: @accent;
-  color: @accent;
+  border-color: @red;
+  color: @red;
 }
 
 /* Spotify */
 
 #custom-media.spotify {
-  border-color: #89d185;
-  color: #89d185;
+  border-color: @green;
+  color: @green;
 }
 
 /*---------------------*/
@@ -228,7 +259,7 @@ window#waybar.HDMI-A-1 #workspaces button:hover {
   padding: 0 8px;
   margin: 5px 2px;
 
-  background-color: rgba(65, 57, 52, 0.65);
+  background-color: @secondary_background;
 
   border-radius: 20px;
 }
@@ -241,7 +272,7 @@ window#waybar.HDMI-A-1 #workspaces button:hover {
 
   color: @accent;
 
-  background-color: rgba(65, 57, 52, 0.65);
+  background-color: @secondary_background;
 
   border-radius: 20px;
 
@@ -409,6 +440,7 @@ window#waybar.HDMI-A-1 #custom-weather:hover {
 tooltip {
   background-color: @tooltip_background;
 
+  border: 1px solid rgba(122, 162, 247, 0.3);
   border-radius: 10px;
 }
 
