@@ -9,9 +9,9 @@ cada área de plugins possui um arquivo pequeno em `lua/plugins/`.
 - `:Lazy` gerencia plugins; as revisões ficam fixadas em `lazy-lock.json`.
 - `:Mason` gerencia LSPs, formatadores, linters e adapters de debug.
 - `:ConformInfo`, `:LspInfo` e `:checkhealth` ajudam no diagnóstico.
-- Markdown usa Treesitter (`markdown` e `markdown_inline`) e
-  `render-markdown.nvim` para melhorar títulos, listas, checkboxes, citações,
-  código, links e separadores diretamente no buffer.
+- Markdown usa o ftplugin nativo do Neovim, Treesitter (`markdown` e
+  `markdown_inline`), LSP e completion geral. A continuação de listas usa um
+  mapeamento local de Enter para manter os marcadores e incrementar números.
 - `:FormatToggle` desativa ou reativa format on save no buffer atual.
 - As sessões são salvas pelo Persistence ao sair, mas só são restauradas por
   comando. Abrir `nvim .` nunca restaura uma sessão automaticamente.
@@ -60,65 +60,204 @@ Kitty se os ícones não aparecerem.
 
 ## Transparência
 
-O Kanagawa usa fundo transparente, permitindo que o fundo do Kitty apareça.
+O TokyoNight usa fundo transparente, permitindo que o fundo do Kitty apareça.
 Alpha real é responsabilidade do terminal. Para 90%, a opção correspondente
 do Kitty é `background_opacity 0.90`; esta configuração não altera o Kitty.
 
-## Atalhos
+## Keymaps
 
-`<leader>` é espaço.
+`<leader>` é espaço. Os movimentos e comandos nativos abaixo são os do Vim e
+Neovim; os demais aparecem porque esta configuração os define explicitamente.
 
-| Atalho | Ação |
+### Movimentação básica
+
+| Keymap | Ação |
 |---|---|
-| `<leader>e` | abrir, focar ou fechar o NvimTree |
-| `<leader>nf` | criar arquivo genérico |
-| `<leader>nc` | criar tipo C# |
-| `<leader>nj` | criar arquivo Java |
-| `<leader>nh` | criar arquivo C |
-| `H` / `L` | buffer anterior / próximo |
-| `<leader>q` | fechar buffer com confirmação se modificado |
-| `<leader>bd` | fechar buffer com confirmação se modificado |
-| `<leader>w` | salvar |
-| `<leader>mr` | alternar a renderização do Markdown no buffer atual |
-| `<C-h/j/k/l>` | navegar entre janelas |
+| `h` / `j` / `k` / `l` | esquerda / baixo / cima / direita |
+| `w` / `b` / `e` | próxima palavra / palavra anterior / fim da palavra |
+| `0` / `^` / `$` | início da linha / primeiro caractere não branco / fim da linha |
+| `gg` / `G` | início / fim do buffer |
+| `<C-d>` / `<C-u>` | descer / subir meia tela |
+| `/` / `?`, `n` / `N` | buscar para frente / trás; próximo / anterior resultado |
+| `%` | ir ao delimitador correspondente |
+| `<C-h>` / `<C-j>` / `<C-k>` / `<C-l>` | navegar para a janela à esquerda / abaixo / acima / direita |
 | `<Esc>` | limpar destaque da busca |
+
+### Vim motions / text objects
+
+| Keymap | Ação |
+|---|---|
+| `iw` / `aw` | palavra interna / palavra com espaços adjacentes |
+| `i"` / `a"`, `i'` / `a'`, `` i` `` / `` a` `` | texto interno / incluindo aspas |
+| `i(`/`a(`, `i[`/`a[`, `i{`/`a{` | texto interno / incluindo delimitadores |
+| `af` / `if` | função ao redor / interior (Treesitter) |
+| `ac` / `ic` | classe ao redor / interior (Treesitter) |
+| `aa` / `ia` | argumento ao redor / interior (Treesitter) |
+| `<leader>mf` / `<leader>mF` | próxima função / função anterior (Treesitter) |
+| `<leader>mc` / `<leader>mC` | próxima classe / classe anterior (Treesitter) |
+| `f` / `F` / `t` / `T` | buscar / mover até caractere na linha; Flash realça destinos e permite repetir |
+| `<leader>j` | busca com rótulos Flash |
+| `<leader>J` | busca de nós Treesitter com Flash |
+
+### Keymaps pessoais
+
+| Keymap | Ação |
+|---|---|
+| `H` / `L` | buffer anterior / próximo |
+| `<leader>w` | salvar arquivo |
+| `<leader>bd` / `<leader>q` | fechar buffer; pergunta se salva alterações |
+| `<leader>Q` | fechar o Neovim |
+| `<leader>nf` | criar arquivo genérico no diretório do buffer/projeto |
+| `<leader>nc` / `<leader>nj` / `<leader>nh` | criar tipo C# / arquivo Java / arquivo C |
+| `<` / `>` (visual) | diminuir / aumentar recuo mantendo seleção |
+
+### nvim-tree.lua
+
+| Keymap | Ação |
+|---|---|
+| `<leader>e` | abrir, focar ou fechar o explorer |
+| `a` / `r` / `d` | criar / renomear / apagar arquivo ou diretório |
+| `x` / `c` / `p` | recortar / copiar / colar |
+| `H` | alternar arquivos ocultos |
+
+### fzf-lua
+
+| Keymap | Ação |
+|---|---|
 | `<leader>ff` / `<leader>fg` | procurar arquivo / texto no projeto |
 | `<leader>fb` / `<leader>fw` | buffers / palavra sob o cursor |
 | `<leader>fs` / `<leader>fS` | símbolos do arquivo / projeto |
-| `<leader>fr` | referências |
-| `<leader>fc` / `<leader>fh` / `<leader>fo` | comandos / ajuda / recentes |
+| `<leader>fr` | referências LSP |
+| `<leader>fc` / `<leader>fh` / `<leader>fo` | comandos / ajuda / arquivos recentes |
+
+### blink.cmp
+
+| Keymap | Ação |
+|---|---|
+| `<C-Space>` | abrir completion ou alternar documentação |
+| `<C-n>` / `<C-p>` / `<Down>` / `<Up>` | próxima / anterior sugestão |
+| `<Tab>` / `<S-Tab>` | próxima/anterior sugestão, avançar/voltar snippet; `<Tab>` também sai de pares com tabout se as ações anteriores não se aplicarem |
+| `<CR>` | aceitar sugestão selecionada ou inserir nova linha |
+| `<C-e>` | cancelar completion |
+| `<C-k>` | alternar documentação da sugestão |
+| `<C-b>` / `<C-f>` | rolar documentação da sugestão |
+
+### tabout.nvim
+
+| Keymap | Ação |
+|---|---|
+| `<Tab>` | sair de `()`, `[]`, `{}`, aspas e crases após Blink e snippets recusarem a tecla; nos demais casos mantém inserção/recuo padrão |
+
+### flash.nvim
+
+| Keymap | Ação |
+|---|---|
+| `<leader>j` | buscar texto com rótulos e saltar para uma posição |
+| `<leader>J` | buscar e selecionar nós Treesitter |
+| `f` / `F` / `t` / `T` | motions nativos realçados pelo Flash; `;` e `,` repetem o movimento |
+
+### mini.surround
+
+| Keymap | Ação |
+|---|---|
+| `sa` | adicionar delimitador em um movimento ou seleção visual |
+| `sd` | apagar delimitador ao redor |
+| `sr` | substituir delimitador |
+| `sf` / `sF` | encontrar delimitador à direita / esquerda |
+| `sh` | realçar delimitador |
+
+### LSP e diagnósticos
+
+| Keymap | Ação |
+|---|---|
 | `gd` / `gD` | definição / declaração |
 | `grr` / `gri` | referências / implementação |
 | `K` | hover/documentação |
-| `<leader>rn` / `<leader>ca` | renomear / ação de código |
+| `<leader>rn` / `<leader>ca` | renomear símbolo / ação de código |
 | `[d` / `]d` | diagnóstico anterior / próximo |
-| `<leader>cd` / `<leader>ch` | diagnóstico da linha / inlay hints |
-| `<leader>cf` | formatar |
+| `<leader>cd` / `<leader>ch` | diagnóstico da linha / alternar inlay hints |
+
+### Conform
+
+| Keymap | Ação |
+|---|---|
+| `<leader>cf` | formatar buffer ou seleção |
+
+### Trouble
+
+| Keymap | Ação |
+|---|---|
 | `<leader>xx` / `<leader>xb` | diagnósticos do projeto / buffer |
 | `<leader>xs` / `<leader>xr` / `<leader>xq` | símbolos / referências / quickfix |
 | `<leader>xt` | TODOs no Trouble |
-| `]h` / `[h` | próximo / anterior hunk Git |
+
+### gitsigns.nvim
+
+| Keymap | Ação |
+|---|---|
+| `]h` / `[h` | próximo / anterior hunk |
 | `<leader>gs` / `<leader>gr` | stage / reset hunk |
-| `<leader>gp` / `<leader>gb` / `<leader>gd` | preview / blame / diff |
-| `<leader>gg` | LazyGit flutuante, quando instalado |
-| `<leader>tt`, `<C-'>`, `<C-/>` ou `<C-_>` | terminal flutuante |
+| `<leader>gp` / `<leader>gb` / `<leader>gd` | preview / alternar blame / diff do arquivo |
+
+### Snacks.terminal
+
+| Keymap | Ação |
+|---|---|
+| `<leader>tt`, `<C-'>`, `<C-/>` ou `<C-_>` | alternar o mesmo terminal flutuante do projeto |
+| `<leader>gg` | abrir/alternar LazyGit (requer `lazygit`) |
 | `<Esc><Esc>` | sair do modo terminal |
-| `F5` / `F9` | continuar/iniciar debug / breakpoint |
-| `F10` / `F11` / `Shift-F11` | step over / into / out |
+| `q` (padrão Snacks) | esconder a janela do terminal |
+| `gf` (padrão Snacks) | abrir o arquivo sob o cursor |
+
+### nvim-dap
+
+| Keymap | Ação |
+|---|---|
+| `<F5>` / `<F9>` | iniciar/continuar debug / alternar breakpoint |
+| `<F10>` / `<F11>` / `<S-F11>` | step over / into / out |
 | `<leader>du` / `<leader>dr` | interface / REPL do debugger |
 | `<leader>dx` / `<leader>dl` | encerrar / repetir debug |
-| `<leader>tn` / `<leader>tf` / `<leader>ta` | teste próximo / arquivo / suíte |
-| `<leader>td` / `<leader>ts` | debugar teste / resumo |
-| `<leader>to` / `<leader>tp` | output / painel de testes |
-| `<leader>ss` / `<leader>sS` | restaurar sessão do projeto / selecionar |
-| `<leader>sl` / `<leader>sd` | última sessão / não salvar esta sessão |
-| `]t` / `[t` / `<leader>ft` | próximo TODO / anterior / procurar TODOs |
 
-Os atalhos de criação geram uma classe Java executável com
+### neotest
+
+| Keymap | Ação |
+|---|---|
+| `<leader>tn` / `<leader>tf` / `<leader>ta` | testar função / arquivo / suíte |
+| `<leader>td` / `<leader>ts` | debugar teste / alternar resumo |
+| `<leader>to` / `<leader>tp` | abrir output / alternar painel |
+
+### persistence.nvim
+
+| Keymap | Ação |
+|---|---|
+| `<leader>ss` / `<leader>sS` | restaurar sessão do projeto / selecionar sessão |
+| `<leader>sl` / `<leader>sd` | restaurar última sessão / não salvar sessão atual |
+
+### todo-comments.nvim
+
+| Keymap | Ação |
+|---|---|
+| `]t` / `[t` | próximo / anterior TODO |
+| `<leader>ft` | procurar TODOs |
+
+### Markdown local
+
+| Keymap | Ação |
+|---|---|
+| `<CR>` em item de lista | continuar lista com o mesmo marcador ou próximo número |
+
+`nvim-colorizer.lua` não define keymaps; oferece os comandos `:ColorizerToggle`,
+`:ColorizerAttachToBuffer`, `:ColorizerDetachFromBuffer` e
+`:ColorizerReloadAllBuffers`.
+
+O Markdown mantém `formatoptions`, `comments` e `formatlistpat` do ftplugin
+nativo; um mapeamento local de Enter continua marcadores `-`, `*`, `+` e listas
+numeradas. O mapeamento primeiro aceita completion do Blink e mantém o
+comportamento de pares do nvim-autopairs fora de itens de lista. LSP,
+completion, formatação e spellcheck são gerais e continuam disponíveis em
+Markdown.
+
+Os comandos de criação geram uma classe Java executável com
 `public static void main`, um arquivo C com `int main(void)`, ou, no caso do
 C#, mantêm a seleção existente entre Class, Interface, Record, Enum e
 Controller.
-
-No NvimTree, `a`, `r`, `d`, `x`, `c`, `p` e `H` seguem os mapeamentos padrão
-atuais para criar, renomear, apagar, recortar, copiar, colar e alternar arquivos
-ocultos.
