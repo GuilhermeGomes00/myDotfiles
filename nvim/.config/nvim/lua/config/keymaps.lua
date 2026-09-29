@@ -48,6 +48,14 @@ map("n", "<leader>q", delete_buffer, { desc = "Fechar buffer" })
 
 map("n", "<leader>Q", "<cmd>qa<CR>", { desc = "Fechar Neovim" })
 
+vim.keymap.set("n", "<leader>sv", "<cmd>vsplit<CR>", {
+	desc = "Split vertical",
+})
+
+vim.keymap.set("n", "<leader>sh", "<cmd>split<CR>", {
+	desc = "Split horizontal",
+})
+
 local function new_file()
 	local base = require("config.root").buffer_dir(0)
 	vim.ui.input({ prompt = "Novo arquivo (relativo a " .. base .. "): " }, function(input)

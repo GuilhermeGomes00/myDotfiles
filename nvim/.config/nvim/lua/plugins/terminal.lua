@@ -1,7 +1,7 @@
 local function terminal()
 	local terminal_info = vim.b.snacks_terminal
 	local cwd = terminal_info and terminal_info.cwd or require("config.root").get(0)
-	Snacks.terminal.toggle(vim.o.shell, {
+	Snacks.terminal.toggle(nil, {
 		cwd = cwd,
 		win = {
 			position = "float",
