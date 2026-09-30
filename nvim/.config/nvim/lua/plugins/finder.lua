@@ -22,13 +22,13 @@ return {
         row = 0.5,
         col = 0.5,
         border = "rounded",
-        -- The picker itself uses the solid FzfLua* Kanagawa highlights above.
+        -- Let Ashen's Neovim highlight groups color the picker.
         backdrop = false,
         preview = { border = "rounded", layout = "flex" },
       },
       files = { formatter = "path.filename_first", git_icons = true, file_icons = true },
       grep = { formatter = "path.filename_first", git_icons = true, file_icons = true },
-      fzf_colors = true,
+      fzf_colors = false,
     },
     config = function(_, opts)
       local fzf = require("fzf-lua")

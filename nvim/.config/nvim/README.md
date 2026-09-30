@@ -60,7 +60,7 @@ Kitty se os ícones não aparecerem.
 
 ## Transparência
 
-O TokyoNight usa fundo transparente, permitindo que o fundo do Kitty apareça.
+O Ashen usa fundo transparente, permitindo que o fundo do Kitty apareça.
 Alpha real é responsabilidade do terminal. Para 90%, a opção correspondente
 do Kitty é `background_opacity 0.90`; esta configuração não altera o Kitty.
 
