@@ -22,6 +22,8 @@ return {
         "bash",
         "yaml",
         "toml",
+        "vim",
+        "regex",
       }
 
       -- O parser JSON atual também cobre JSON com comentários. O catálogo da
@@ -46,7 +48,7 @@ return {
         "html",
         "css",
         "markdown",
-        "bash",
+        "sh",
         "yaml",
         "toml",
       }

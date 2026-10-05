@@ -8,6 +8,10 @@ cada área de plugins possui um arquivo pequeno em `lua/plugins/`.
 
 - `:Lazy` gerencia plugins; as revisões ficam fixadas em `lazy-lock.json`.
 - `:Mason` gerencia LSPs, formatadores, linters e adapters de debug.
+- `:MasonToolsInstall` reinstala ferramentas ausentes; o
+  [mason-tool-installer](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)
+  também verifica a lista de `lua/plugins/tools.lua` ao iniciar, sem atualizar
+  automaticamente ferramentas já instaladas.
 - `:ConformInfo`, `:LspInfo` e `:checkhealth` ajudam no diagnóstico.
 - Markdown usa o ftplugin nativo do Neovim, Treesitter (`markdown` e
   `markdown_inline`), LSP e completion geral. A continuação de listas usa um
@@ -20,11 +24,11 @@ cada área de plugins possui um arquivo pequeno em `lua/plugins/`.
 
 ## Dependências externas
 
-Já instaladas neste sistema e necessárias para todos os recursos configurados:
+Dependências do sistema necessárias para os recursos configurados:
 
 ```bash
 sudo pacman -S --needed neovim git ripgrep fd fzf bat wl-clipboard \
-  tree-sitter-cli nodejs npm dotnet-sdk go clang jdk-openjdk eslint
+  tree-sitter-cli nodejs npm dotnet-sdk aspnet-runtime go clang jdk-openjdk
 ```
 
 Finalidade:
@@ -34,19 +38,22 @@ Finalidade:
 - `wl-clipboard`: clipboard `unnamedplus` no Wayland.
 - `tree-sitter-cli`: compilação dos parsers da API atual do Treesitter.
 - `nodejs` e `npm`: projetos JS/TS e ferramentas desse ecossistema.
-- `dotnet-sdk`, `go`, `clang`, `jdk-openjdk`: SDKs/compiladores dos projetos.
-- `eslint`: lint adicional de JS/TS; use a configuração ESLint do projeto.
+- `dotnet-sdk`, `go`, `clang`, `jdk-openjdk`: SDKs/compiladores dos projetos;
+  JDTLS exige Java 21 ou superior. A configuração procura esse runtime em
+  `/usr/lib/jvm` quando o Java padrão é antigo.
+- `aspnet-runtime`: runtime ASP.NET 10 exigido pelo CSharpier instalado pelo Mason.
+- `eslint_d` (Mason): lint adicional de JS/TS; use a configuração ESLint do projeto.
 
 O Mason já instalou, dentro dos dados do Neovim, os LSPs, formatadores,
 linters e adapters usados pela configuração: Roslyn, gopls, vtsls,
 BasedPyright, clangd, jdtls, lua-language-server, servidores web/dados,
 CSharpier, gofumpt, Prettier, Ruff, clang-format, google-java-format, StyLua,
-shfmt, Taplo, ShellCheck, cspell, netcoredbg, Delve, debugpy, js-debug,
+shfmt, Taplo, ShellCheck, cspell, eslint_d, netcoredbg, Delve, debugpy, js-debug,
 codelldb e os bundles Java. Portanto, não é necessário duplicá-los no sistema.
 O Roslyn vem do registro recomendado pelo `roslyn.nvim` e está na versão
 5.12.0, compatível com o requisito atual do plugin.
-O JUnit Platform Console 6.0.3 exigido pelo `neotest-java` também foi baixado
-e teve o SHA-256 conferido.
+`:NeotestJava setup` instala o JUnit Platform Console usado pelo `neotest-java`
+e confere seu SHA-256.
 
 Opcional:
 
@@ -104,12 +111,20 @@ Neovim; os demais aparecem porque esta configuração os define explicitamente.
 | Keymap | Ação |
 |---|---|
 | `H` / `L` | buffer anterior / próximo |
+| `<leader><S-Tab>` / `<S-Tab>` (Normal) | buffer anterior / próximo na ordem visual da barra |
 | `<leader>w` | salvar arquivo |
 | `<leader>bd` / `<leader>q` | fechar buffer; pergunta se salva alterações |
 | `<leader>Q` | fechar o Neovim |
 | `<leader>nf` | criar arquivo genérico no diretório do buffer/projeto |
 | `<leader>nc` / `<leader>nj` / `<leader>nh` | criar tipo C# / arquivo Java / arquivo C |
 | `<` / `>` (visual) | diminuir / aumentar recuo mantendo seleção |
+
+### bufferline.nvim
+
+Os buffers abertos aparecem como abas na parte superior, inclusive com um único
+buffer. Em Normal mode, `Space` seguido de `Shift+Tab` volta e `Shift+Tab` avança
+na ordem visual da barra, mesmo após reorganizar com `:BufferLineMovePrev` ou
+`:BufferLineMoveNext`. Em Insert/Select, Blink e snippets continuam usando Tab.
 
 ### nvim-tree.lua
 

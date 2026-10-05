@@ -8,7 +8,7 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       theme = "doom",
-      hide = { statusline = false, tabline = true, winbar = true },
+      hide = { statusline = false, tabline = false, winbar = true },
       config = {
         header = {
           "",
@@ -35,7 +35,7 @@ return {
           },
           { icon = "󰅚  ", desc = "Sair", key = "q", action = "quit" },
         },
-        footer = { "Kanagawa Wave · Neovim " .. vim.version().major .. "." .. vim.version().minor },
+        footer = { "Ashen · Neovim " .. vim.version().major .. "." .. vim.version().minor },
       },
     },
   },

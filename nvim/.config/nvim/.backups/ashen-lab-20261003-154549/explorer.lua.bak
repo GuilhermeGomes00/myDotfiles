@@ -1,0 +1,86 @@
+local function toggle_explorer()
+	local api = require("nvim-tree.api")
+	if api.tree.is_visible() then
+		if vim.bo.filetype == "NvimTree" then
+			api.tree.close()
+		else
+			api.tree.focus()
+		end
+	else
+		api.tree.open({ find_file = true, focus = true })
+	end
+end
+
+return {
+	{
+		"nvim-tree/nvim-web-devicons",
+		lazy = true,
+		opts = { variant = "dark" },
+	},
+	{
+		"nvim-tree/nvim-tree.lua",
+		cmd = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFindFile" },
+		keys = {
+			{ "<leader>e", toggle_explorer, desc = "Explorer" },
+		},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		init = function()
+			vim.g.loaded_netrw = 1
+			vim.g.loaded_netrwPlugin = 1
+			local function open_project_tree()
+				if vim.g.started_with_directory then
+					vim.schedule(function()
+						require("nvim-tree.api").tree.open({ find_file = true, focus = false })
+					end)
+				end
+			end
+
+			-- Scheduling from the spec init works whether Lazy imports it just before
+			-- or during VimEnter and keeps `nvim .` deterministic.
+			open_project_tree()
+		end,
+		opts = {
+			-- netrw is disabled in init, so its FileExplorer group does not exist.
+			hijack_netrw = false,
+			sync_root_with_cwd = true,
+			respect_buf_cwd = true,
+			update_focused_file = { enable = true, update_root = false },
+			view = {
+				side = "right",
+				width = 30,
+				preserve_window_proportions = true,
+				signcolumn = "yes",
+			},
+			renderer = {
+				group_empty = true,
+				highlight_git = "name",
+				icons = {
+					git_placement = "after",
+					show = { file = true, folder = true, folder_arrow = true, git = true, modified = true },
+					glyphs = {
+						git = {
+							unstaged = "M",
+							staged = "S",
+							unmerged = "U",
+							renamed = "R",
+							untracked = "?",
+							deleted = "D",
+							ignored = "I",
+						},
+					},
+				},
+			},
+			filters = { dotfiles = true, git_ignored = false },
+			git = { enable = true, ignore = false, show_on_dirs = true, timeout = 400 },
+			diagnostics = { enable = true, show_on_dirs = true },
+			filesystem_watchers = { enable = true },
+			actions = {
+				open_file = {
+					quit_on_open = false,
+					resize_window = true,
+					window_picker = { enable = true, exclude = { filetype = { "NvimTree", "notify" } } },
+				},
+			},
+		},
+	},
+}

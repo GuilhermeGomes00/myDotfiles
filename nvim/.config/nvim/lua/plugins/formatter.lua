@@ -23,7 +23,9 @@ return {
   {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
-    cmd = { "ConformInfo", "Format" },
+    -- :Format is created in init and loads Conform through require(). A Lazy
+    -- command handler would delete it when the plugin finishes loading.
+    cmd = { "ConformInfo" },
     keys = {
       {
         "<leader>cf",
@@ -41,7 +43,7 @@ return {
         css = { "prettier" },
         go = { "gofumpt" },
         html = { "prettier" },
-        java = { "google_java_format" },
+        java = { "google-java-format" },
         javascript = { "prettier" },
         javascriptreact = { "prettier" },
         json = { "prettier" },

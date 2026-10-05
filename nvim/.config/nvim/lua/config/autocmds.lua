@@ -89,6 +89,8 @@ vim.api.nvim_create_autocmd("FileType", {
   group = group,
   pattern = { "markdown", "text", "gitcommit" },
   callback = function()
+    -- Restore these local settings when the buffer changes filetype.
+    vim.b.undo_ftplugin = (vim.b.undo_ftplugin or "") .. " | setlocal spell< spelllang< wrap<"
     vim.opt_local.spell = true
     local has_portuguese = #vim.api.nvim_get_runtime_file("spell/pt.utf-8.spl", false) > 0
     vim.opt_local.spelllang = has_portuguese and { "pt_br", "en_us" } or { "en_us" }
@@ -100,6 +102,7 @@ vim.api.nvim_create_autocmd("FileType", {
         buffer = vim.api.nvim_get_current_buf(),
         desc = "Continuar lista Markdown",
       })
+      vim.b.undo_ftplugin = vim.b.undo_ftplugin .. " | silent! iunmap <buffer> <CR>"
     end
   end,
 })

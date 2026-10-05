@@ -37,7 +37,7 @@ opt.pumheight = 12
 opt.winborder = "rounded"
 opt.laststatus = 3
 opt.showmode = false
-opt.showtabline = 0
+opt.showtabline = 2
 opt.cmdheight = 1
 opt.shortmess:append("I")
 opt.splitkeep = "screen"

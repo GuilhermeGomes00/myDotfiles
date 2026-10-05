@@ -30,7 +30,51 @@ return {
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
-		opts = { terminal = {} },
+		opts = {
+			terminal = {},
+
+			-- ============================================================
+			-- INDENTAÇÃO / INDENT GUIDES
+			-- ============================================================
+			indent = {
+				enabled = true,
+				indent = {
+					enabled = true,
+
+					-- Caractere das guias normais de indentação.
+					-- Troque ":" aqui se quiser outro símbolo no futuro.
+					char = ":",
+
+					-- false = mostra todos os níveis de indentação.
+					only_scope = false,
+
+					-- false = funciona em todas as janelas normais.
+					only_current = false,
+				},
+				scope = {
+					enabled = true,
+
+					-- Caractere que destaca o scope atual detectado pelo
+					-- Tree-sitter/indentação. Troque ":" aqui para alterá-lo.
+					char = ":",
+
+					-- Não desenhar underline no começo do scope.
+					underline = false,
+					only_current = false,
+
+					-- Nesta versão, indent.scope aceita as opções de Snacks.scope.
+					-- Usa Tree-sitter disponível e fallback para indentação,
+					-- mantendo a detecção oficial sem forçar uma lista de nodes.
+					treesitter = { enabled = true },
+				},
+
+				-- Desativado para usar apenas ":", sem desenhos ┌ └ │ de chunks.
+				chunk = { enabled = false },
+
+				-- Mantém o filtro padrão que exclui buffers especiais de interfaces.
+				-- Mantém também os highlights padrão SnacksIndent/SnacksIndentScope.
+			},
+		},
 		keys = {
 			{ "<leader>tt", terminal, desc = "Terminal flutuante" },
 			{ "<C-'>", terminal, desc = "Terminal flutuante", mode = { "n", "t" } },

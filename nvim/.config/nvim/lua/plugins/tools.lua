@@ -1,0 +1,38 @@
+return {
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    lazy = false,
+    dependencies = { "mason-org/mason.nvim" },
+    opts = {
+      ensure_installed = {
+        "roslyn",
+        "csharpier",
+        "gofumpt",
+        "prettier",
+        "ruff",
+        "clang-format",
+        "google-java-format",
+        "stylua",
+        "shfmt",
+        "shellcheck",
+        "cspell",
+        "eslint_d",
+        "netcoredbg",
+        "delve",
+        "debugpy",
+        "js-debug-adapter",
+        "codelldb",
+        "java-debug-adapter",
+        "java-test",
+      },
+      auto_update = false,
+      run_on_start = true,
+      start_delay = 3000,
+      integrations = {
+        ["mason-lspconfig"] = false,
+        ["mason-null-ls"] = false,
+        ["mason-nvim-dap"] = false,
+      },
+    },
+  },
+}

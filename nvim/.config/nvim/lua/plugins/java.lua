@@ -17,6 +17,20 @@ local function java_bundles()
   return bundles
 end
 
+local function java_executable()
+  local candidates = { vim.fn.exepath("java") }
+  vim.list_extend(candidates, vim.fn.glob("/usr/lib/jvm/*/bin/java", false, true))
+  for _, candidate in ipairs(candidates) do
+    if candidate ~= "" and vim.fn.executable(candidate) == 1 then
+      local result = vim.system({ candidate, "-version" }, { text = true }):wait()
+      local major = tonumber((result.stderr or ""):match('version "(%d+)'))
+      if result.code == 0 and major and major >= 21 then
+        return candidate
+      end
+    end
+  end
+end
+
 local function start_jdtls(bufnr)
   local root = vim.fs.root(bufnr, { ".git", "mvnw", "gradlew", "settings.gradle", "settings.gradle.kts" })
     or vim.fs.root(bufnr, { "pom.xml", "build.gradle", "build.gradle.kts" })
@@ -24,10 +38,16 @@ local function start_jdtls(bufnr)
     return
   end
 
+  local java = java_executable()
+  if not java then
+    vim.notify_once("JDTLS exige Java 21+ (Arch: sudo pacman -S jdk-openjdk)", vim.log.levels.WARN)
+    return
+  end
+
   local workspace = vim.fn.stdpath("state") .. "/jdtls/" .. vim.fn.sha256(root):sub(1, 16)
   local config = {
     name = "jdtls",
-    cmd = { "jdtls", "-data", workspace },
+    cmd = { "jdtls", "--java-executable", java, "-data", workspace },
     root_dir = root,
     capabilities = require("blink.cmp").get_lsp_capabilities(),
     settings = {
