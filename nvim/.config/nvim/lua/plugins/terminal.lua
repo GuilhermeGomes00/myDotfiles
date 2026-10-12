@@ -43,7 +43,7 @@ return {
 
 					-- Caractere das guias normais de indentação.
 					-- Troque ":" aqui se quiser outro símbolo no futuro.
-					char = ":",
+					char = ".",
 
 					-- false = mostra todos os níveis de indentação.
 					only_scope = false,

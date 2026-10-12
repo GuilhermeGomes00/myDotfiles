@@ -69,6 +69,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("kitty")
+	hl.exec_cmd("kitty -e spotatui")
 end)
 
 -------------------------------
@@ -147,8 +148,8 @@ hl.config({
 
 		blur = {
 			enabled = true,
-			size = 3,
-			passes = 1,
+			size = 10,
+			passes = 2,
 			vibrancy = 0.1696,
 		},
 	},
@@ -289,14 +290,18 @@ hl.bind(
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.layout("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))
 
--- Move focus with mainMod + arrow keys
+-- Move focus with mainMod + arrow keys or vim keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -367,8 +372,8 @@ hl.bind("SUPER + E", hl.dsp.exec_cmd('kitty -e yazi "$HOME"'))
 -- SUPER + S abre o spotatui
 hl.bind("SUPER + D", hl.dsp.exec_cmd("kitty -e spotatui"))
 
--- SUPER + F abre o Firefox
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("firefox"))
+-- SUPER + F abre o qutebroser
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("qutebrowser"))
 
 -- CTRL + ALT + DELETE abre o btop++ no terminal
 hl.bind("CTRL + ALT + DELETE", hl.dsp.exec_cmd(terminal .. " -e btop"))
@@ -382,9 +387,9 @@ hl.bind(
 	hl.dsp.exec_cmd(
 		"wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle; "
 			.. "if wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED; then "
-			.. 'mpv --no-video --volume=30 "$HOME/.local/share/soundsmic/mute/microphone-muted-teamspeak.mp3" >/dev/null 2>&1 & '
+			.. 'mpv --no-video --volume=50 "$HOME/.local/share/soundsmic/mute/microphone-muted-teamspeak.mp3" >/dev/null 2>&1 & '
 			.. "else "
-			.. 'mpv --no-video --volume=30 "$HOME/.local/share/soundsmic/unmute/microphone-activated-teamspeak.mp3" >/dev/null 2>&1 & '
+			.. 'mpv --no-video --volume=50 "$HOME/.local/share/soundsmic/unmute/microphone-activated-teamspeak.mp3" >/dev/null 2>&1 & '
 			.. "fi"
 	)
 )

@@ -7,7 +7,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {
-			transparent = true,
+			transparent = false,
 			hl = { merge_override = require("config.highlights") },
 			terminal = {
 				colors = {
