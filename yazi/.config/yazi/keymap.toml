@@ -6,8 +6,8 @@ desc = "Compactar arquivos selecionados"
 
 [[mgr.prepend_keymap]]
 on = "<A-x>"
-run = "open --interactive"
-desc = "Extrair arquivo"
+run = "open"
+desc = "Extrair arquivo aqui"
 
 [[mgr.prepend_keymap]]
 on = "<C-t>"

@@ -1,3 +1,13 @@
 .DS_Store
 *.log
 *.tmp
+
+# Obsidian - dados locais, cache e sessoes
+/obsidian/.config/obsidian/
+
+# Fish - variaveis universais locais
+/fish/.config/fish/fish_variables
+
+# Spotatui - configuracao local do cliente
+/spotatui/.config/spotatui/client.yml
+/spotatui/.config/spotatui/config.yml

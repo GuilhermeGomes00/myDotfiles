@@ -1,449 +1,145 @@
-/*----------------*/
-/*-----COLORS-----*/
-/*----------------*/
+/*
+ * Retrofuture — edição vermelha para Waybar/Hyprland.
+ * Visual inspirado no CSS MIT de https://github.com/diinki/diinki-retrofuture
+ * Não altera suas configurações do Hyprland, Rofi, wallpaper ou GTK.
+ */
 
-/* Tokyo Night */
-@define-color bg #1a1b26;
-@define-color bg_dark #16161e;
-
-@define-color foreground #c0caf5;
-@define-color muted #565f89;
-
-@define-color red #f7768e;
-@define-color green #9ece6a;
-@define-color yellow #e0af68;
-@define-color orange #ff9e64;
-@define-color blue #7aa2f7;
-@define-color cyan #7dcfff;
-@define-color purple #bb9af7;
-
-/* Fundos translúcidos */
-
-@define-color modules_background rgba(26, 27, 38, 0.45);
-@define-color secondary_background rgba(22, 22, 30, 0.45);
-
-/* Tema principal */
-
-@define-color accent @red;
-@define-color accent_dim rgba(247, 118, 142, 0.67);
-@define-color accent_bg rgba(247, 118, 142, 0.16);
-@define-color accent_hover #ff9eaa;
-
-/* Workspaces */
-
-@define-color workspaces_button_off @accent_dim;
-@define-color workspaces_button_on @accent;
-@define-color workspaces_button_active_bg @accent_bg;
-
-/* HDMI-A-1 */
-
-@define-color workspaces_button_off_hdmi @accent_dim;
-@define-color workspaces_button_on_hdmi @accent;
-@define-color workspaces_button_active_bg_hdmi @accent_bg;
-
-/* Tray */
-
-@define-color tray_menu rgba(26, 27, 38, 0.92);
-@define-color tray_menu_border @blue;
-@define-color tray_menu_item @foreground;
-@define-color tray_menu_item_hover @accent;
-@define-color tray_menu_item_hover_background rgba(122, 162, 247, 0.15);
-
-/* Clock */
-
-@define-color clock_idle @accent;
-@define-color clock_hover @accent_hover;
-
-/* Weather */
-
-@define-color weather_idle rgba(125, 207, 255, 0.67);
-@define-color weather_hover @cyan;
-
-@define-color weather_idle_hdmi @accent_dim;
-@define-color weather_hover_hdmi @accent;
-
-/* CPU */
-
-@define-color cpu_idle @accent;
-@define-color cpu_hover @accent_hover;
-
-/* RAM */
-
-@define-color memory_idle @accent;
-@define-color memory_hover @accent_hover;
-
-/* Temperature */
-
-@define-color temperature_idle @accent;
-@define-color temperature_hover @accent_hover;
-
-/* Brightness */
-
-@define-color brightness_idle @accent;
-@define-color brightness_hover @accent_hover;
-
-/* Sound */
-
-@define-color sound_idle @accent;
-@define-color sound_hover @accent_hover;
-
-/* Microphone */
-
-@define-color mic_idle @accent;
-@define-color mic_hover @accent_hover;
-
-/* Running apps */
-
-@define-color running_apps_idle @accent;
-@define-color running_apps_hover @accent_hover;
-
-/* Network */
-
-@define-color network_idle @accent;
-@define-color network_hover @accent_hover;
-
-/* Tooltip */
-
-@define-color tooltip_background rgba(26, 27, 38, 0.92);
-@define-color tooltip_text @foreground;
-
-/*----------------*/
-/*-----GLOBAL-----*/
-/*----------------*/
+/* Para personalizar, altere as cores aqui: */
+@define-color fundo #141216;
+@define-color cartao #27232b;
+@define-color cartao_hover #36262b;
+@define-color texto #e4d5c8;
+@define-color texto_fraco #b9a6a5;
+@define-color vermelho #ef4a53;
+@define-color vermelho_claro #ff7279;
+@define-color vermelho_escuro #b02b39;
+@define-color aviso #f5b26a;
 
 * {
-  font-family: "Monaspace Neon Frozen", "JetBrainsMono Nerd Font";
+  font-family:
+    "Monaspace Neon Frozen", "Maple Mono", "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
   font-weight: 600;
-  font-size: 16px;
+  min-height: 0;
+  border: none;
 }
 
 window#waybar {
-  background-color: transparent;
+  background-color: @fundo;
+  color: @texto;
+  border: 1px solid @vermelho_escuro;
+  border-radius: 16px;
 }
 
-#waybar {
-  background-color: transparent;
-}
-
-/* Cada "pill" da barra */
-
+/* Módulos como cartões pequenos, no visual do projeto original. */
 #workspaces,
-#custom-running-apps,
-#clock,
 #custom-weather,
 #network,
 #cpu,
+#custom-gpu,
 #memory,
-#custom-wl-gammarelay-temperature,
-#custom-wl-gammarelay-brightness,
 #custom-wireplumber,
-#custom-microphone {
-  background-color: @modules_background;
-
-  border-radius: 14px;
-
-  padding: 2px 10px;
-  margin: 1px 4px 4px;
-
-  transition: all 0.7s ease;
+#custom-microphone,
+#tray,
+#clock {
+  background-color: @cartao;
+  color: @texto;
+  border-radius: 8px;
+  padding: 3px 8px;
+  margin: 5px 0 5px 6px;
+  transition-duration: 120ms;
 }
-
-/*--------------------*/
-/*-----WORKSPACES-----*/
-/*--------------------*/
 
 #workspaces {
-  margin-left: 6px;
-  margin-right: 16px;
-
-  padding: 2px 6px;
+  padding: 2px 5px;
 }
-
 #workspaces button {
-  color: @workspaces_button_off;
-
-  margin: 0px 2px;
-  padding: 0px 4px;
-
-  border-radius: 10px;
-
-  transition: all 0.3s ease;
-}
-
-#workspaces button.active {
-  color: @workspaces_button_on;
-  background-color: @workspaces_button_active_bg;
-
-  transition: all 0.3s ease;
-}
-
-#workspaces button:hover {
-  background: none;
-
-  color: @workspaces_button_on;
-
+  color: @texto_fraco;
+  min-width: 0;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  padding: 1px 7px;
+  margin: 0 1px;
   box-shadow: none;
   text-shadow: none;
-
-  border-color: transparent;
-
-  transition: all 0.3s ease;
+  transition-duration: 120ms;
+}
+#workspaces button:hover {
+  color: @vermelho_claro;
+  background-color: @cartao_hover;
+  box-shadow: none;
+  text-shadow: none;
+}
+#workspaces button.active,
+#workspaces button.focused {
+  color: @vermelho;
+  font-weight: 800;
+}
+#workspaces button.urgent {
+  color: @aviso;
 }
 
-/* HDMI-A-1 */
-
-window#waybar.HDMI-A-1 #workspaces button {
-  color: @workspaces_button_off_hdmi;
+/* Indicadores solicitados: sempre visíveis. */
+#cpu,
+#custom-gpu,
+#memory {
+  color: @vermelho_claro;
+}
+#network {
+  color: @texto;
+}
+#custom-wireplumber,
+#custom-microphone {
+  color: @texto;
+}
+#custom-weather {
+  color: @vermelho_claro;
+}
+#clock {
+  margin-right: 6px;
+  color: @vermelho_claro;
 }
 
-window#waybar.HDMI-A-1 #workspaces button.active {
-  color: @workspaces_button_on_hdmi;
-  background-color: @workspaces_button_active_bg_hdmi;
+#custom-weather:hover,
+#network:hover,
+#cpu:hover,
+#custom-gpu:hover,
+#memory:hover,
+#custom-wireplumber:hover,
+#custom-microphone:hover,
+#clock:hover {
+  background-color: @vermelho;
+  color: @fundo;
 }
-
-window#waybar.HDMI-A-1 #workspaces button:hover {
-  color: @workspaces_button_on_hdmi;
-}
-
-/*-------------------------*/
-/*---PLAYER DE MUSICA------*/
-/*-------------------------*/
-
-#custom-media {
-  padding: 2px 10px 3px 6px;
-  margin: 5px 2px;
-
-  background-color: @secondary_background;
-
-  border: 1px solid;
-  border-radius: 20px;
-
-  transition: all 0.3s ease;
-}
-
-/* Firefox */
-
-#custom-media.firefox {
-  border-color: @red;
-  color: @red;
-}
-
-/* Spotify */
-
-#custom-media.spotify {
-  border-color: @green;
-  color: @green;
-}
-
-/*---------------------*/
-/*---RUNNING APPS------*/
-/*---------------------*/
-
-#custom-running-apps {
-  color: @running_apps_idle;
-
-  transition: all 0.3s ease;
-}
-
-#custom-running-apps:hover {
-  color: @running_apps_hover;
-
-  transition: all 0.3s ease;
-}
-
-/*----------------*/
-/*------TRAY------*/
-/*----------------*/
 
 #tray {
-  padding: 0 8px;
-  margin: 5px 2px;
-
-  background-color: @secondary_background;
-
-  border-radius: 20px;
+  padding: 3px 7px;
 }
-
-/* Botão que abre/fecha o drawer */
-
-#custom-tray-button {
-  padding: 0 6px;
-  margin: 5px 2px;
-
-  color: @accent;
-
-  background-color: @secondary_background;
-
-  border-radius: 20px;
-
-  transition: all 0.3s ease;
+#tray menu {
+  background-color: @fundo;
+  border: 1px solid @vermelho_escuro;
+  padding: 4px;
+  color: @texto;
 }
-
-#custom-tray-button:hover {
-  color: @accent_hover;
-
-  transition: all 0.3s ease;
+#tray menu menuitem {
+  background-color: @cartao;
+  color: @texto;
+  padding: 4px;
+  margin: 2px;
+  border-radius: 5px;
 }
-
-/*---------------*/
-/*-----CLOCK-----*/
-/*---------------*/
-
-#clock {
-  color: @clock_idle;
-
-  transition: all 0.3s ease;
+#tray menu menuitem:hover {
+  background-color: @vermelho;
+  color: @fundo;
 }
-
-#clock:hover {
-  color: @clock_hover;
-
-  transition: all 0.3s ease;
-}
-
-/*-----------------*/
-/*-----WEATHER-----*/
-/*-----------------*/
-
-/* DP-1 / padrão */
-
-#custom-weather {
-  color: @weather_idle;
-
-  transition: all 0.3s ease;
-}
-
-#custom-weather:hover {
-  color: @weather_hover;
-
-  transition: all 0.3s ease;
-}
-
-/* HDMI-A-1 */
-
-window#waybar.HDMI-A-1 #custom-weather {
-  color: @weather_idle_hdmi;
-}
-
-window#waybar.HDMI-A-1 #custom-weather:hover {
-  color: @weather_hover_hdmi;
-}
-
-/*-----------------*/
-/*-----CPU/RAM-----*/
-/*-----------------*/
-
-#cpu {
-  color: @cpu_idle;
-
-  transition: all 0.3s ease;
-}
-
-#cpu:hover {
-  color: @cpu_hover;
-
-  transition: all 0.3s ease;
-}
-
-#memory {
-  color: @memory_idle;
-
-  transition: all 0.3s ease;
-}
-
-#memory:hover {
-  color: @memory_hover;
-
-  transition: all 0.3s ease;
-}
-
-/*-----------------*/
-/*-----NETWORK-----*/
-/*-----------------*/
-
-#network {
-  color: @network_idle;
-
-  transition: all 0.3s ease;
-}
-
-#network:hover {
-  color: @network_hover;
-
-  transition: all 0.3s ease;
-}
-
-/*-----------------------*/
-/*-----TEMP/BRIGHT-------*/
-/*-----------------------*/
-
-#custom-wl-gammarelay-temperature {
-  color: @temperature_idle;
-
-  transition: all 0.3s ease;
-}
-
-#custom-wl-gammarelay-temperature:hover {
-  color: @temperature_hover;
-
-  transition: all 0.3s ease;
-}
-
-#custom-wl-gammarelay-brightness {
-  color: @brightness_idle;
-
-  transition: all 0.3s ease;
-}
-
-#custom-wl-gammarelay-brightness:hover {
-  color: @brightness_hover;
-
-  transition: all 0.3s ease;
-}
-
-/*---------------------*/
-/*-----WIREPLUMBER-----*/
-/*---------------------*/
-
-#custom-wireplumber {
-  color: @sound_idle;
-
-  transition: all 0.3s ease;
-}
-
-#custom-wireplumber:hover {
-  color: @sound_hover;
-
-  transition: all 0.3s ease;
-}
-
-/*-----------------------*/
-/*-----MICROPHONE--------*/
-/*-----------------------*/
-
-#custom-microphone {
-  color: @mic_idle;
-
-  transition: all 0.3s ease;
-}
-
-#custom-microphone:hover {
-  color: @mic_hover;
-
-  transition: all 0.3s ease;
-}
-
-/*-----------------*/
-/*-----TOOLTIP-----*/
-/*-----------------*/
 
 tooltip {
-  background-color: @tooltip_background;
-
-  border: 1px solid rgba(122, 162, 247, 0.3);
-  border-radius: 10px;
+  background-color: @fundo;
+  color: @texto;
+  border: 1px solid @vermelho_escuro;
+  border-radius: 8px;
 }
-
 tooltip label {
-  color: @tooltip_text;
+  color: @texto;
 }

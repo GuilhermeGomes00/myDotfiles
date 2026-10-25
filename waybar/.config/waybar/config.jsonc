@@ -1,217 +1,73 @@
+// Waybar Retrofuture Vermelha — adaptada para Hyprland (DP-1 e HDMI-A-1).
+// Inspirada em https://github.com/diinki/diinki-retrofuture (licenca MIT).
+// Ajuste "margin-left" e "margin-right" caso a barra fique muito estreita.
 [
   {
     "output": "DP-1",
-
     "layer": "top",
     "position": "top",
-    "height": 5,
-    "margin-top": 6,
-    "margin-left": 10,
-    "margin-right": 10,
+    "height": 38,
+    "margin-top": 10,
+    "margin-left": 240,
+    "margin-right": 240,
     "spacing": 0,
     "reload_style_on_change": true,
-
-    "modules-left": ["group/group-left"],
-
-    "modules-center": ["group/group-center"],
-
-    "modules-right": ["group/group-right", "group/tray"],
-
-    "group/group-left": {
-      "orientation": "horizontal",
-      "modules": ["hyprland/workspaces", "custom/media"],
-    },
-
-    "group/group-center": {
-      "orientation": "horizontal",
-      "modules": ["clock", "custom/weather"],
-    },
-
-    "group/group-right": {
-      "orientation": "horizontal",
-      "modules": [
-        "network",
-        "cpu",
-        "memory",
-        "custom/wireplumber",
-        "custom/microphone",
-      ],
-    },
-
-    "custom/media": {
-      "format": "{}",
-      "return-type": "json",
-      "exec": "~/.config/waybar/assets/mediaplayer",
-
-      "on-click": "playerctl play-pause",
-      "on-click-right": "playerctl next",
-      "on-scroll-up": "playerctl next",
-      "on-scroll-down": "playerctl previous",
-
-      "tooltip": true,
-    },
-
-    "group/tray": {
-      "orientation": "horizontal",
-      "drawer": {
-        "transition-duration": 300,
-        "children-class": "tray-item",
-      },
-      "modules": ["custom/tray-button", "tray"],
-    },
-
-    "custom/tray-button": {
-      "format": "",
-      "tooltip": false,
-    },
-
-    "tray": {
-      "icon-size": 18,
-      "spacing": 8,
-      "show-passive-items": true,
-    },
-
-    "clock": {
-      "format": "{:%a %d %b %H:%M}",
-      "tooltip-format": "<tt>{calendar}</tt>",
-
-      "calendar": {
-        "mode": "year",
-        "mode-mon-col": 3,
-
-        "format": {
-          "months": "<span color='#bb9af7'><b>{}</b></span>",
-          "days": "<span color='#c0caf5'><b>{}</b></span>",
-          "weekdays": "<span color='#7aa2f7'><b>{}</b></span>",
-          "today": "<span color='#f7768e'><b><u>{}</u></b></span>",
-        },
-      },
-
-      "actions": {
-        "on-click": "shift_reset",
-        "on-scroll-up": "shift_up",
-        "on-scroll-down": "shift_down",
-      },
-    },
-
-    "custom/weather": {
-      "format": "{}",
-      "exec": "~/.config/waybar/assets/weather",
-      "restart-interval": 300,
-      "return-type": "json",
-      "on-click": "xdg-open https://weather.com/en-IN/weather/today/l/294e1ac420e35622f2a093ac2951485fa4c28cd2fe5b8a01da513a1b2bb809ca",
-    },
-
-    "cpu": {
-      "interval": 5,
-      "format": "CPU {usage}%",
-      "tooltip": true,
-    },
-
-    "memory": {
-      "interval": 5,
-      "format": "RAM {percentage}%",
-      "tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB",
-    },
-
-    "network": {
-      "interval": 5,
-      "format-wifi": "   {bandwidthDownBytes}   {bandwidthUpBytes}",
-      "format-ethernet": "󰈀   {bandwidthDownBytes}   {bandwidthUpBytes}",
-      "format-disconnected": " disconnected",
-      "tooltip-format-ethernet": "{ifname}\nDownload: {bandwidthDownBytes}\nUpload: {bandwidthUpBytes}",
-      "tooltip-format-wifi": "{essid}\nDownload: {bandwidthDownBytes}\nUpload: {bandwidthUpBytes}",
-    },
-
-    "custom/wireplumber": {
-      "format": "{}",
-      "return-type": "json",
-      "exec": "~/.config/waybar/assets/volume_bar.sh",
-      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-      "on-click-right": "kitty -e wiremix",
-      "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0",
-      "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
-      "tooltip": true,
-    },
-
-    "custom/microphone": {
-      "format": "{}",
-      "return-type": "json",
-      "exec": "~/.config/waybar/assets/mic_bar.sh",
-      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-      "on-click-right": "kitty -e wiremix",
-      "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+ --limit 1.0",
-      "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
-      "tooltip": true,
-    },
-  },
-
-  {
-    "output": "HDMI-A-1",
-
-    "layer": "top",
-    "position": "top",
-    "height": 15,
-    "margin-top": 2,
-    "margin-left": 10,
-    "margin-right": 10,
-    "spacing": 0,
-    "reload_style_on_change": true,
-
-    "modules-left": ["hyprland/workspaces"],
-
-    "modules-center": ["clock", "custom/weather"],
-
+    "modules-left": ["hyprland/workspaces", "cpu", "custom/gpu", "memory"],
+    "modules-center": ["custom/weather"],
     "modules-right": [
-      "cpu",
-      "memory",
+      "network",
       "custom/wireplumber",
       "custom/microphone",
+      "tray",
+      "clock",
     ],
-
-    "clock": {
-      "format": "{:%a %d %b %H:%M}",
-      "tooltip-format": "<tt>{calendar}</tt>",
-
-      "calendar": {
-        "mode": "year",
-        "mode-mon-col": 3,
-
-        "format": {
-          "months": "<span color='#bb9af7'><b>{}</b></span>",
-          "days": "<span color='#c0caf5'><b>{}</b></span>",
-          "weekdays": "<span color='#7aa2f7'><b>{}</b></span>",
-          "today": "<span color='#f7768e'><b><u>{}</u></b></span>",
-        },
-      },
-
-      "actions": {
-        "on-click": "shift_reset",
-        "on-scroll-up": "shift_up",
-        "on-scroll-down": "shift_down",
-      },
+    "hyprland/workspaces": {
+      "disable-scroll": true,
+      "all-outputs": false,
+      "sort-by-number": true,
+      "tooltip": false,
     },
-
     "custom/weather": {
       "format": "{}",
-      "exec": "/usr/bin/python3 ~/.config/waybar/assets/weather.py",
-      "restart-interval": 300,
       "return-type": "json",
-      "on-click": "xdg-open https://weather.com/en-IN/weather/today/l/294e1ac420e35622f2a093ac2951485fa4c28cd2fe5b8a01da513a1b2bb809ca",
+      "exec": "~/.config/waybar/backup/assets/weather",
+      "restart-interval": 300,
+      "tooltip": true,
     },
-
+    "network": {
+      "interval": 5,
+      "format-wifi": " {bandwidthDownBits}",
+      "format-ethernet": "󰈀 {bandwidthDownBits}",
+      "format-linked": "󰈀 link",
+      "format-disconnected": "󰤮 offline",
+      "tooltip-format": "{ifname}\\nIP: {ipaddr}\\nDownload: {bandwidthDownBytes}\\nUpload: {bandwidthUpBytes}",
+    },
     "cpu": {
       "interval": 5,
       "format": "CPU {usage}%",
       "tooltip": true,
     },
-
+    "custom/gpu": {
+      "interval": 5,
+      "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+      "format": "GPU {}%",
+      "tooltip": false,
+    },
     "memory": {
       "interval": 5,
       "format": "RAM {percentage}%",
-      "tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB",
+      "tooltip-format": "RAM: {used:0.1f} GiB / {total:0.1f} GiB",
     },
-
+    "custom/wireplumber": {
+      "format": "{}",
+      "return-type": "json",
+      "exec": "~/.config/waybar/assets/volume_bar.sh",
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "on-click-right": "kitty -e wiremix",
+      "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0",
+      "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+      "tooltip": true,
+    },
     "custom/microphone": {
       "format": "{}",
       "return-type": "json",
@@ -222,7 +78,82 @@
       "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
       "tooltip": true,
     },
-
+    "clock": {
+      "format": "󰅐 {:%H:%M}",
+      "tooltip": true,
+      "tooltip-format": "<tt>{calendar}</tt>",
+      "calendar": {
+        "mode": "year",
+        "mode-mon-col": 3,
+        "format": {
+          "months": "<span color='#ef4a53'><b>{}</b></span>",
+          "days": "<span color='#e4d5c8'><b>{}</b></span>",
+          "weekdays": "<span color='#b9a6a5'><b>{}</b></span>",
+          "today": "<span color='#ff7279'><b><u>{}</u></b></span>",
+        },
+      },
+    },
+    "tray": {
+      "icon-size": 15,
+      "spacing": 6,
+      "show-passive-items": true,
+    },
+  },
+  {
+    "output": "HDMI-A-1",
+    "layer": "top",
+    "position": "top",
+    "height": 38,
+    "margin-top": 10,
+    "margin-left": 135,
+    "margin-right": 135,
+    "spacing": 0,
+    "reload_style_on_change": true,
+    "modules-left": ["hyprland/workspaces", "cpu", "custom/gpu", "memory"],
+    "modules-center": ["custom/weather"],
+    "modules-right": [
+      "network",
+      "custom/wireplumber",
+      "custom/microphone",
+      "clock",
+    ],
+    "hyprland/workspaces": {
+      "disable-scroll": true,
+      "all-outputs": false,
+      "sort-by-number": true,
+      "tooltip": false,
+    },
+    "custom/weather": {
+      "format": "{}",
+      "return-type": "json",
+      "exec": "~/.config/waybar/backup/assets/weather",
+      "restart-interval": 300,
+      "tooltip": true,
+    },
+    "network": {
+      "interval": 5,
+      "format-wifi": " {bandwidthDownBits}",
+      "format-ethernet": "󰈀 {bandwidthDownBits}",
+      "format-linked": "󰈀 link",
+      "format-disconnected": "󰤮 offline",
+      "tooltip-format": "{ifname}\\nIP: {ipaddr}\\nDownload: {bandwidthDownBytes}\\nUpload: {bandwidthUpBytes}",
+    },
+    "cpu": {
+      "interval": 5,
+      "format": "CPU {usage}%",
+      "tooltip": true,
+    },
+    "custom/gpu": {
+      "interval": 5,
+      "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+      "format": "GPU {}%",
+      "tooltip": false,
+    },
+    "memory": {
+      "interval": 5,
+      "format": "RAM {percentage}%",
+      "tooltip-format": "RAM: {used:0.1f} GiB / {total:0.1f} GiB",
+    },
     "custom/wireplumber": {
       "format": "{}",
       "return-type": "json",
@@ -232,6 +163,31 @@
       "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0",
       "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
       "tooltip": true,
+    },
+    "custom/microphone": {
+      "format": "{}",
+      "return-type": "json",
+      "exec": "~/.config/waybar/assets/mic_bar.sh",
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+      "on-click-right": "kitty -e wiremix",
+      "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+ --limit 1.0",
+      "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+      "tooltip": true,
+    },
+    "clock": {
+      "format": "󰅐 {:%H:%M}",
+      "tooltip": true,
+      "tooltip-format": "<tt>{calendar}</tt>",
+      "calendar": {
+        "mode": "year",
+        "mode-mon-col": 3,
+        "format": {
+          "months": "<span color='#ef4a53'><b>{}</b></span>",
+          "days": "<span color='#e4d5c8'><b>{}</b></span>",
+          "weekdays": "<span color='#b9a6a5'><b>{}</b></span>",
+          "today": "<span color='#ff7279'><b><u>{}</u></b></span>",
+        },
+      },
     },
   },
 ]

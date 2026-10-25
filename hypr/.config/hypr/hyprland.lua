@@ -70,6 +70,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("kitty")
 	hl.exec_cmd("kitty -e spotatui")
+	hl.exec_cmd("steam")
 end)
 
 -------------------------------
@@ -136,12 +137,12 @@ hl.config({
 		rounding_power = 2,
 
 		-- Change transparency of focused and unfocused windows
-		active_opacity = 1.0,
-		inactive_opacity = 1.0,
+		active_opacity = 0.95,
+		inactive_opacity = 0.75,
 
 		shadow = {
 			enabled = true,
-			range = 4,
+			range = 5,
 			render_power = 3,
 			color = 0xee1a1a1a,
 		},
@@ -372,8 +373,8 @@ hl.bind("SUPER + E", hl.dsp.exec_cmd('kitty -e yazi "$HOME"'))
 -- SUPER + S abre o spotatui
 hl.bind("SUPER + D", hl.dsp.exec_cmd("kitty -e spotatui"))
 
--- SUPER + F abre o qutebroser
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("qutebrowser"))
+-- SUPER + F abre o firefox
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("firefox"))
 
 -- CTRL + ALT + DELETE abre o btop++ no terminal
 hl.bind("CTRL + ALT + DELETE", hl.dsp.exec_cmd(terminal .. " -e btop"))
@@ -393,6 +394,16 @@ hl.bind(
 			.. "fi"
 	)
 )
+
+local mango = os.getenv("HOME") .. "/.local/bin/mangohud-cs2-toggle"
+
+-- Pressionar F8: mostrar HUD
+
+-- Soltar F8: ocultar HUD
+hl.bind("F8", hl.dsp.exec_cmd(mango), {
+	release = true,
+	dont_inhibit = true,
+})
 
 --------------------------------
 --WINDOWS AND WORKSPACES ----
