@@ -11,3 +11,9 @@
 # Spotatui - configuracao local do cliente
 /spotatui/.config/spotatui/client.yml
 /spotatui/.config/spotatui/config.yml
+
+# Backups
+*.bak
+*.save
+.backup/
+.backups/

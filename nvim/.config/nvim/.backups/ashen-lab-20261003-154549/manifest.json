@@ -1,8 +1,0 @@
-{
-  "files": {
-    "colorscheme.lua": "7cc5bf02c9661796b1e8bd6d3f2352d216f761afb041bbb344d56b8823f671ea",
-    "explorer.lua": "1348a77910a33f1df4d4ac2e2cf3caf314a44090003a2cf35e2d8db3279d1607"
-  },
-  "structure": "lazy.nvim: return { { ficcdaf/ashen.nvim, version=*, lazy=false, priority=1000, opts, config } }",
-  "note": "Cópias exatas do estado de trabalho antes do laboratório, incluindo alterações preexistentes. Extensão .bak evita importação pelo lazy.nvim."
-}
