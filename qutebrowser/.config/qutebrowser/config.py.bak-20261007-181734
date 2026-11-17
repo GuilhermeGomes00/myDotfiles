@@ -1,0 +1,106 @@
+# Carrega configurações feitas pelo :set.
+# Isso mantém, por exemplo, o Google que configuramos antes.
+config.load_autoconfig()
+
+
+# =========================
+#        APARÊNCIA
+# =========================
+
+# Fonte
+c.fonts.default_family = "monospace"
+c.fonts.default_size = "10pt"
+
+# -------- ABAS --------
+
+
+# Fundo da barra
+c.colors.tabs.bar.bg = "#0d0d0d"
+
+# Abas inativas
+c.colors.tabs.odd.bg = "#161616"
+c.colors.tabs.odd.fg = "#8a8a8a"
+
+c.colors.tabs.even.bg = "#161616"
+c.colors.tabs.even.fg = "#8a8a8a"
+
+# Aba selecionada
+c.colors.tabs.selected.odd.bg = "#c94f2c"
+c.colors.tabs.selected.odd.fg = "#ffffff"
+
+c.colors.tabs.selected.even.bg = "#c94f2c"
+c.colors.tabs.selected.even.fg = "#ffffff"
+
+# Indicador de carregamento
+c.colors.tabs.indicator.start = "#ff5f38"
+c.colors.tabs.indicator.stop = "#ff9e64"
+
+# Espaçamento
+c.tabs.padding = {
+    "top": 6,
+    "bottom": 6,
+    "left": 10,
+    "right": 10,
+}
+
+# Esconde a barra se tiver apenas uma aba
+c.tabs.show = "multiple"
+
+
+# -------- STATUS BAR --------
+
+c.colors.statusbar.normal.bg = "#0d0d0d"
+c.colors.statusbar.normal.fg = "#d8d8d8"
+
+# URL
+c.colors.statusbar.url.fg = "#d8d8d8"
+c.colors.statusbar.url.success.https.fg = "#ff9e64"
+
+# Statusbar mais limpa
+c.statusbar.widgets = [
+    "keypress",
+    "search_match",
+    "url",
+    "scroll",
+    "tabs",
+]
+
+
+# -------- HINTS --------
+
+# As letras que aparecem quando você aperta "f"
+c.colors.hints.bg = "#ff6b35"
+c.colors.hints.fg = "#0d0d0d"
+
+c.colors.hints.match.fg = "#ffffff"
+
+
+# -------- JANELA --------
+
+# Remove decoração do sistema
+c.window.hide_decoration = True
+
+# =========================
+#       DARK MODE
+# =========================
+
+# Diz aos sites que preferimos o tema escuro nativo deles
+c.colors.webpage.preferred_color_scheme = "dark"
+
+# Força dark mode inclusive em sites que não possuem tema escuro
+c.colors.webpage.darkmode.enabled = True
+
+# Evita estragar imagens/fotos
+c.colors.webpage.darkmode.policy.images = "smart"
+# Alterna o dark mode forçado
+config.bind(",d", "config-cycle colors.webpage.darkmode.enabled true false")
+
+# =========================
+#         ADBLOCK
+# =========================
+
+# Ativa o bloqueador
+c.content.blocking.enabled = True
+
+# Usa o bloqueador ABP do Brave + bloqueio por hosts
+c.content.blocking.method = "both"

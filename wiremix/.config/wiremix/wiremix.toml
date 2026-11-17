@@ -1,0 +1,57 @@
+theme = "tokyonight"
+
+[themes.tokyonight]
+
+# Dispositivo / stream padrão
+default_device = { fg = "#7aa2f7", add_modifier = "BOLD" }
+default_stream = { fg = "#7aa2f7", add_modifier = "BOLD" }
+
+# Cursor / seleção
+selector = { fg = "#7aa2f7", add_modifier = "BOLD" }
+
+# Abas
+tab = { fg = "#565f89" }
+tab_selected = { fg = "#7aa2f7", add_modifier = "BOLD" }
+tab_marker = { fg = "#bb9af7" }
+
+# Indicador de mais itens
+list_more = { fg = "#565f89" }
+
+# Nodes
+node_title = { fg = "#c0caf5" }
+node_target = { fg = "#7dcfff" }
+
+# Volume
+volume = { fg = "#c0caf5" }
+volume_empty = { fg = "#3b4261" }
+volume_filled = { fg = "#7aa2f7" }
+
+# Medidor de áudio
+meter_inactive = { fg = "#3b4261" }
+meter_active = { fg = "#9ece6a" }
+meter_overload = { fg = "#f7768e", add_modifier = "BOLD" }
+
+meter_center_inactive = { fg = "#565f89" }
+meter_center_active = { fg = "#9ece6a" }
+
+# Configuração dos dispositivos
+config_device = { fg = "#c0caf5" }
+config_profile = { fg = "#7dcfff" }
+
+# Dropdown
+dropdown_icon = { fg = "#bb9af7" }
+dropdown_border = { fg = "#7aa2f7" }
+dropdown_item = { fg = "#c0caf5" }
+
+dropdown_selected = {
+    fg = "#1a1b26",
+    bg = "#7aa2f7",
+    add_modifier = "BOLD"
+}
+
+dropdown_more = { fg = "#565f89" }
+
+# Help
+help_border = { fg = "#7aa2f7" }
+help_item = { fg = "#c0caf5" }
+help_more = { fg = "#565f89" }

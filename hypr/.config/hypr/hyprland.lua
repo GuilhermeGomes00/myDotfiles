@@ -29,16 +29,17 @@ hl.monitor({
 hl.monitor({
 	output = "DP-1",
 	mode = "1920x1080@240",
-	position = "1080x620",
+	position = "0x0",
 	scale = "1",
+	transform = 0,
 })
 
 hl.monitor({
 	output = "HDMI-A-1",
 	mode = "1920x1080@100",
-	position = "0x0",
+	position = "-1920x0",
 	scale = "1",
-	transform = 3,
+	transform = 0,
 })
 
 ---------------------
@@ -69,8 +70,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("kitty")
-	hl.exec_cmd("kitty -e spotatui")
-	hl.exec_cmd("steam")
 end)
 
 -------------------------------
